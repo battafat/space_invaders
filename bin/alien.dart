@@ -34,20 +34,19 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows){
   return mainBoard;
 }
 
-Map<String, List<String>> shiftAliensRight(newBoard1, row) {
-  // Map<String, List<String>> newBoard = board;
-
+Map<String, List<String>> shiftAliensRight(
+    Map<String, List<String>> newBoard1, String rowKey) {
   var newBoard = newBoard1;
   // TODO: refactor i value to not include border.
   // Todo: refactor i value into variable. Currently hard to read
-  for (int i = newBoard[row].length - 1; i >= 0; i--) {
+  for (int i = newBoard[rowKey]!.length - 1; i >= 0; i--) {
     if (i == 1) {
-      newBoard[row][i] = Board.space;
+      newBoard[rowKey]![i] = Board.space;
       continue;
-    } else if (newBoard[row][i] == Board.border) {
+    } else if (newBoard[rowKey]![i] == Board.border) {
       continue;
     } else {
-      newBoard[row][i] = newBoard[row][i - 1];
+      newBoard[rowKey]![i] = newBoard[rowKey]![i - 1];
     }
   }
   return newBoard;
