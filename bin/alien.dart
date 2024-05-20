@@ -8,6 +8,7 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows){
     if (mainBoard[boardClass.alienRow1]
             ?[mainBoard[boardClass.alienRow1]!.length - 2] ==
         Board.alien) {
+      // would it be better to use the bang operator instead of ?
       while (mainBoard[boardClass.alienRow1]?[1] != Board.alien) {
         for (var row in rows) {
         shiftAliensLeft(mainBoard, row);

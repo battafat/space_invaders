@@ -22,6 +22,12 @@ class Board {
     "blankRow5": ['|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'],
     "playerRow": ['|', ' ', ' ', ' ', '^', ' ', ' ', ' ', '|'],
   };
+  // should these be nullable?
+  List<String>? getRow(String rowKey){
+    List<String>? row = board[rowKey];
+    return row;
+  }
+
 
   void displayBoard(board) {
     print('line 120 ${board["alienRow"]}');
