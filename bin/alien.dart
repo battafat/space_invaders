@@ -1,36 +1,48 @@
 import "board.dart";
 
-Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows){
+// function goes through the alien rows and shifts them right and then left across
+// the screen.
+Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
   var boardClass = Board();
   var mainBoard = boardClass.board;
-  int count = 0;
-  while (count < iterations) {
-    if (mainBoard[boardClass.alienRow1]
-            ?[mainBoard[boardClass.alienRow1]!.length - 2] ==
-        Board.alien) {
-      // would it be better to use the bang operator instead of ?
-      while (mainBoard[boardClass.alienRow1]?[1] != Board.alien) {
-        for (var row in rows) {
-        shiftAliensLeft(mainBoard, row);
-        shiftAliensLeft(mainBoard, row);
+
+  for (List<String> row in rows) {
+    // the last coordinate before the right-hand border
+    String lastSpot = row[row.length - 2];
+    int count = 0;
+    while (count < iterations) {
+      if (lastSpot == Board.alien) {
+        // while the aliens haven't yet reached the leftmost coordinate before the border
+        while (row[1] != Board.alien) {
+        // shift left if the first available coordinate isn't an alien
+          for (var row in rows) {
+            shiftAliensLeft(mainBoard, row);
+            shiftAliensLeft(mainBoard, row);
+          }
+        // print the board
+          for (var r in mainBoard.values) {
+            print(r.join(' '));
+          }
         }
+      } else {
+        //shift right if the aliens are as far left as possible
+        for (var row in rows) {
+          shiftAliensRight(mainBoard, row);
+          shiftAliensRight(mainBoard, row);
+        }
+        // print the board
         for (var r in mainBoard.values) {
           print(r.join(' '));
         }
       }
-    } else {
       for (var row in rows) {
-        shiftAliensRight(mainBoard, row);
-        shiftAliensRight(mainBoard, row);
-      }
-      for (var r in mainBoard.values) {
-        print(r.join(' '));
+      // if the first available coordinate is an alien, then the aliens have made one
+      // full shift to the left. Add that to the count.
+        if (mainBoard[row]?[1] == Board.alien) {
+          count += 1;
+        }
       }
     }
-    for (var row in rows)
-    {if (mainBoard[row]?[1] == Board.alien) {
-      count += 1;
-    }}
   }
   return mainBoard;
 }

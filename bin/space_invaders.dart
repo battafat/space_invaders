@@ -9,7 +9,7 @@ void main() {
 // repeat, while the player is alive
   var controlBoard = Board();
   var board = controlBoard.board;
-  var alienRows = [board[controlBoard.alienRow1], board[controlBoard.alienRow2]];
+  List<List<String>?> alienRows = [controlBoard.getRow(Board.alienRow1), controlBoard.getRow(Board.alienRow2)];
   
   aliensTraverseXaxis(2, alienRows);
 

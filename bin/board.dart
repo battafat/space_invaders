@@ -3,14 +3,14 @@ class Board {
   static const alien = '@';
   static const border = '|';
 
-  final alienRow1 = "alienRow1";
-  final alienRow2 = "alienRow2";
-  final blankRow1 = "blankRow1";
-  final blankRow2 = "blankRow2";
-  final blankRow3 = "blankRow3";
-  final blankRow4 = "blankRow4";
-  final blankRow5 = "blankRow5";
-  final playerRow = "playerRow";
+  static const alienRow1 = "alienRow1";
+  static const alienRow2 = "alienRow2";
+  static const blankRow1 = "blankRow1";
+  static const blankRow2 = "blankRow2";
+  static const blankRow3 = "blankRow3";
+  static const blankRow4 = "blankRow4";
+  static const blankRow5 = "blankRow5";
+  static const playerRow = "playerRow";
 
   Map<String, List<String>> board = {
     "alienRow1": ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'],
