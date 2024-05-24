@@ -17,6 +17,7 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
   int count = 0;
   while (count < iterations) {
     if (lastSpot == Board.alien) {
+      // once the aliens reach lastSpot, go left until they reach the firstSpot
       // while the aliens haven't yet reached the leftmost coordinate before the border
       while (row[1] != Board.alien) {
         
@@ -52,9 +53,7 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
 
 Map<String, List<String>> shiftAliensRight(
     Map<String, List<String>> newBoard1, List<String> row) {
-  print('line 56: did shiftAliensRight run?');
-  print('initial row value = $row');
-  print('newBoard1 before loop: $newBoard1');
+  
   // TODO: refactor i value to not include border.
   // Todo: refactor i value into variable. Currently hard to read
   for (int i = row.length - 1; i >= 0; i--) {
@@ -67,11 +66,8 @@ Map<String, List<String>> shiftAliensRight(
       continue;
     } else {
       row[i] = row[i - 1];
-      print('row update: $row');
     }
   }
-  print('newBoard1 after loop: $newBoard1');
-  
   return newBoard1;
 }
 
