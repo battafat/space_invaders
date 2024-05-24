@@ -40,12 +40,10 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
         print(r.join(' '));
       }
     }
-    for (var row in rows) {
     // if the first available coordinate is an alien, then the aliens have made one
     // full shift to the left. Add that to the count.
-      if (mainBoard[row]?[1] == Board.alien) {
-        count += 1;
-      }
+    if (row[1] == Board.alien) {
+      count += 1;
     }
   }
   return mainBoard;
