@@ -10,11 +10,30 @@ void main() {
   var controlBoard = Board();
   Map<String, List<String>> board = controlBoard.board;
   print('alienRow1 should = ${controlBoard.getRow(Board.alienRow1)}');
-  List<List<String>?> alienRows = [controlBoard.getRow(Board.alienRow1), controlBoard.getRow(Board.alienRow2)];
+  // List<List<String>> alienRows = [controlBoard.getRow(Board.alienRow1)!, controlBoard.getRow(Board.alienRow2)!];
+  
+  List<List<String>> alienRows = [board[Board.alienRow1]!, board[Board.alienRow2]!];
   // aliensTraverseXaxis(2, alienRows);
-  for (var row in alienRows){
-    shiftAliensRight(board, row!);
+  var row = alienRows[0];
+
+  Map<String, List<String>> printableLeft = shiftAliensLeft(board, row);
+  for (var y in board.values){
+    print(y);
   }
+
+  // Map<String, List<String>> printableRight = shiftAliensRight(board, row);
+  // print("board: ");
+  // for (var x in board.values){
+  //   print(x);
+  // }
+  // print("printableRight: ");
+  // for (var inst in printableRight.values) {
+  //   print(inst);
+  // }
+  // printableRight = shiftAliensRight(printableRight, row);
+  // for (var inst in printableRight.values) {
+  //   print(inst);
+  // }
   // TODO: maybe you have to print out here?
 
 }

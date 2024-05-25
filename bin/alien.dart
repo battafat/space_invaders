@@ -6,7 +6,7 @@ import "board.dart";
 // the aliens all left until the leftmost alien occupies the leftmost spot next to
 // the border.
 
-Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
+Map<String, List<String>> aliensTraverseXaxis(int iterations, List<List<String>> rows) {
   var boardClass = Board();
   var mainBoard = boardClass.board;
   print('line 12 mainboard.values ${mainBoard.values}');
@@ -22,8 +22,8 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
       while (row[1] != Board.alien) {
         
       // shift left if the first available coordinate isn't an alien
-        for (var row in rows) {
-          shiftAliensLeft(mainBoard, row);
+        for (var i = 0; i < rows.length; i++) {
+          mainBoard = shiftAliensLeft(mainBoard, row);
         }
       // print the board
         for (var r in mainBoard.values) {
@@ -32,13 +32,19 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List rows) {
       }
     } else {
       //shift right if the aliens are as far left as possible
-      for (var row in rows) {
-        shiftAliensRight(mainBoard, row);
+      for (var alienRow in rows) {
+        mainBoard = shiftAliensRight(mainBoard, alienRow);
       }
       // print the board
+      print('mainboard: ');
       for (var r in mainBoard.values) {
         print(r.join(' '));
       }
+      print('boardClass.board: ');
+      for (var r in boardClass.board.values) {
+        print(r.join(' '));
+      }
+      count = 2;
     }
     // if the first available coordinate is an alien, then the aliens have made one
     // full shift to the left. Add that to the count.
