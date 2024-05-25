@@ -6,10 +6,10 @@ import "board.dart";
 // the aliens all left until the leftmost alien occupies the leftmost spot next to
 // the border.
 
-Map<String, List<String>> aliensTraverseXaxis(int iterations, List<List<String>> rows) {
-  var boardClass = Board();
-  var mainBoard = boardClass.board;
-  print('line 12 mainboard.values ${mainBoard.values}');
+Map<String, List<String>> aliensTraverseXaxis(Map<String, List<String>> board, int iterations, List<List<String>> rows) {
+  // var boardClass = Board();
+  // var mainBoard = boardClass.board;
+  // print('line 12 mainboard.values ${mainBoard.values}');
 
   List<String> row = rows[0];
     // the last coordinate before the right-hand border
@@ -21,30 +21,29 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List<List<String>>
       // while the aliens haven't yet reached the leftmost coordinate before the border
       while (row[1] != Board.alien) {
         
-      // shift left if the first available coordinate isn't an alien
-        for (var i = 0; i < rows.length; i++) {
-          mainBoard = shiftAliensLeft(mainBoard, row);
-        }
+      // shift left if the leftmost coordinate isn't an alien
+        
+        shiftAliensLeft(board, row);
+        
       // print the board
-        for (var r in mainBoard.values) {
+        for (var r in board.values) {
           print(r.join(' '));
         }
       }
     } else {
       //shift right if the aliens are as far left as possible
-      for (var alienRow in rows) {
-        mainBoard = shiftAliensRight(mainBoard, alienRow);
-      }
+      
+      shiftAliensRight(board, row);
       // print the board
       print('mainboard: ');
-      for (var r in mainBoard.values) {
+      for (var r in board.values) {
         print(r.join(' '));
       }
       print('boardClass.board: ');
-      for (var r in boardClass.board.values) {
+      for (var r in board.values) {
         print(r.join(' '));
       }
-      count = 2;
+      // count = 2;
     }
     // if the first available coordinate is an alien, then the aliens have made one
     // full shift to the left. Add that to the count.
@@ -52,7 +51,7 @@ Map<String, List<String>> aliensTraverseXaxis(int iterations, List<List<String>>
       count += 1;
     }
   }
-  return mainBoard;
+  return board;
 }
 
 Map<String, List<String>> shiftAliensRight(

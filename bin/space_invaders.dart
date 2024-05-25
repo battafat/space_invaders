@@ -13,13 +13,19 @@ void main() {
   // List<List<String>> alienRows = [controlBoard.getRow(Board.alienRow1)!, controlBoard.getRow(Board.alienRow2)!];
   
   List<List<String>> alienRows = [board[Board.alienRow1]!, board[Board.alienRow2]!];
-  // aliensTraverseXaxis(2, alienRows);
+  aliensTraverseXaxis(board, 2, alienRows);
   var row = alienRows[0];
 
-  Map<String, List<String>> printableLeft = shiftAliensLeft(board, row);
-  for (var y in board.values){
-    print(y);
-  }
+
+
+
+
+
+// TODO: write tests for left and right shift
+  // Map<String, List<String>> printableLeft = shiftAliensLeft(board, row);
+  // for (var y in board.values){
+  //   print(y);
+  // }
 
   // Map<String, List<String>> printableRight = shiftAliensRight(board, row);
   // print("board: ");
