@@ -9,7 +9,7 @@ void main (){
   // the border '|' occupies row[0] and row[row.length-1].
   // So leftmost possible alien coordinate is row[1].
   // And rightmost possible alien coordinate is row[row.len - 2].
-  group('alienShiftRight tests, from row[0] to row[row.length - 1]', (){
+  group('alienShiftRight tests', (){
     test('alienShiftRight called when already rightmost aligned', (){
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
@@ -45,4 +45,16 @@ void main (){
     });
 
   });
+
+  group('shiftAliensLeft tests', (){
+    test('aliensShiftLeft, aliens start row[1]', () {
+      final alien = Alien();
+      final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
+      const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
+      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
+    });
+  });
+
+  
 }
+

@@ -38,19 +38,23 @@ class Alien {
     return row;
   }
 
-  Map<String, List<String>> shiftAliensLeft(
-      Map<String, List<String>> board, List<String> row) {
+  List<String> shiftAliensLeft(List<String> row) {
+    final leftmostIndex = 1;
+    if (row[leftmostIndex] == Board.alien) {
+      // TODO: include error or throw. return row, but show an error.
+      return row;
+    }    
     for (int i = 0; i < row.length; i++) {
       if (i == row.length - 2) {
         row[i] = Board.space;
         continue;
-      } else if (row[i] == Board.border) {
+      } if (row[i] == Board.border) {
         continue;
       } else {
         row[i] = row[i + 1];
       }
     }
-    return board;
+    return row;
   }
 
   Map<String, List<String>> aliensTraverseXaxis(Map<String, List<String>> board, int iterations, List<List<String>> rows) {
@@ -70,7 +74,7 @@ class Alien {
           
         // shift left if the leftmost coordinate isn't an alien
           
-          shiftAliensLeft(board, row);
+          shiftAliensLeft(row);
           
         // print the board
           for (var r in board.values) {
