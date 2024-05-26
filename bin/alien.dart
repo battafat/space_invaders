@@ -9,11 +9,16 @@ class Alien {
 
   List<String> shiftAliensRight(List<String> row) {
     int rightmostIndex = row.length - 2;
+    if (row[rightmostIndex] == Board.alien){
+      // TODO: include error or throw. return row, but show an error.
+      return row;
+    }
     // TODO: refactor i value to not include border.
     // Todo: refactor i value into variable. Currently hard to read
     for (int i = row.length - 2; i >= 1; i--) {
       // when loop reaches leftmost coordinate,
       // it should be a space, not the border string
+
       if (i == 1) {
         row[i] = Board.space;
         continue;

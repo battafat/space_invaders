@@ -9,28 +9,40 @@ void main (){
   // the border '|' occupies row[0] and row[row.length-1].
   // So leftmost possible alien coordinate is row[1].
   // And rightmost possible alien coordinate is row[row.len - 2].
+  group('alienShiftRight tests, from row[0] to row[row.length - 1]', (){
+    test('alienShiftRight called when already rightmost aligned', (){
+      final alien = Alien();
+      final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
+      const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
+      expect(alien.shiftAliensRight(alienRow1), updatedRow);
+    });
+    test('aliensShiftRight aliens start row[1]', () {
+      final alien = Alien();
+      final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
+      const updatedRow = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
+      expect(alien.shiftAliensRight(alienRow1), updatedRow);
+    });
+    test('aliensShiftRight aliens start row[2]', () {
+      final alien = Alien();
+      final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
+      const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
+      expect(alien.shiftAliensRight(alienRow1), updatedRow);
+    });
+    test('alienShiftRight aliens start row[3]', () {
+      final alien = Alien();
+      final boardClass = Board();
+      final board = boardClass.board;
+      final alienRow1 = board[Board.alienRow1];
+      const updatedRow = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
+      expect(alien.shiftAliensRight(alienRow1!), updatedRow);
+    });
 
-  test('aliensShiftRight aliens start row[2]', () {
-    final alien = Alien();
-    final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
-    const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
-    expect(alien.shiftAliensRight(alienRow1), updatedRow);
+    test('aliensShiftRight aliens start row[4]', (){
+      final alien = Alien();
+      final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
+      const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
+      expect(alien.shiftAliensRight(alienRow1), updatedRow);
+    });
+
   });
-  test('alienShiftRight aliens start row[3]', () {
-    final alien = Alien();
-    final boardClass = Board();
-    final board = boardClass.board;
-    final alienRow1 = board[Board.alienRow1];
-    const updatedRow = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
-    expect(alien.shiftAliensRight(alienRow1!), updatedRow);
-  });
-
-  test('aliensShiftRight aliens start row[4]', (){
-    final alien = Alien();
-    final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
-    const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
-    expect(alien.shiftAliensRight(alienRow1), updatedRow);
-  });
-
-
 }
