@@ -47,7 +47,12 @@ void main (){
   });
 
   group('shiftAliensLeft tests', (){
-
+    test('alienShiftLeft aliens start row[3]', () {
+      final alien = Alien();
+      final alienRow1 = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
+      const updatedRow = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
+      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
+    });
     test('aliensShiftLeft, aliens start row[2]', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
