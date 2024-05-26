@@ -7,8 +7,7 @@ import "board.dart";
 // the border.
 class Alien {
 
-  Map<String, List<String>> shiftAliensRight(
-      Map<String, List<String>> newBoard1, List<String> row) {
+  List<String> shiftAliensRight(List<String> row) {
     int rightmostIndex = row.length - 2;
     // TODO: refactor i value to not include border.
     // Todo: refactor i value into variable. Currently hard to read
@@ -30,7 +29,7 @@ class Alien {
         row[i] = row[i - 1];
       }
     }
-    return newBoard1;
+    return row;
   }
 
   Map<String, List<String>> shiftAliensLeft(
@@ -75,7 +74,7 @@ class Alien {
       } else {
         //shift right if the aliens are as far left as possible
         
-        shiftAliensRight(board, row);
+        shiftAliensRight(row);
         // print the board
         print('mainboard: ');
         for (var r in board.values) {
