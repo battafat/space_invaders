@@ -18,14 +18,15 @@ class Alien {
         row[i] = Board.space;
         continue;
       }
-      else if (i == rightmostIndex){
+      if (i == rightmostIndex){
         if (row[i] == Board.alien){
           break;
         }
       }
-      else if (row[i] == Board.border) {
+      if (row[i] == Board.border) {
         continue;
-      } else {
+      } 
+      else {
         row[i] = row[i - 1];
       }
     }
