@@ -13,8 +13,10 @@ void main() {
   // List<List<String>> alienRows = [controlBoard.getRow(Board.alienRow1)!, controlBoard.getRow(Board.alienRow2)!];
   
   List<List<String>> alienRows = [board[Board.alienRow1]!, board[Board.alienRow2]!];
-  aliensTraverseXaxis(board, 2, alienRows);
+  // aliensTraverseXaxis(board, 2, alienRows);
   var row = alienRows[0];
+  print('initial row: ');
+  print(row);
 
 
 
@@ -26,6 +28,18 @@ void main() {
   // for (var y in board.values){
   //   print(y);
   // }
+
+  for (var i = 0; i < 2; i++){
+    shiftAliensRight(board, row);
+  }
+  print("align right: ");
+  print(board.values);
+  for (var i = 0; i < 4; i++){
+    shiftAliensLeft(board, row);
+    print(board.values.first);
+  }
+  print('align left: ');
+  print(board.values);
 
   // Map<String, List<String>> printableRight = shiftAliensRight(board, row);
   // print("board: ");
