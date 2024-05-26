@@ -47,6 +47,18 @@ void main (){
   });
 
   group('shiftAliensLeft tests', (){
+    test('alienShiftLeft called when rightmost aligned', () {
+      final alien = Alien();
+      final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
+      const updatedRow = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
+      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
+    });
+    test('aliensShiftLeft aliens start row[4]', () {
+      final alien = Alien();
+      final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
+      const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
+      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
+    });
     test('alienShiftLeft aliens start row[3]', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
@@ -59,7 +71,7 @@ void main (){
       const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
       expect(alien.shiftAliensLeft(alienRow1), updatedRow);
     });
-    test('aliensShiftLeft, aliens start row[1]', () {
+    test('aliensShiftLeft, aliens start row[1], leftmost aligned', () {
       final alien = Alien();
       final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
       const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
