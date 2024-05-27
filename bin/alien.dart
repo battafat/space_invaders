@@ -1,3 +1,5 @@
+import "package:dart_console/dart_console.dart";
+
 import "board.dart";
 
 // function goes through the alien rows and shifts them right and then left across
@@ -58,10 +60,7 @@ class Alien {
   }
 
   Map<String, List<String>> aliensTraverseXaxis(Map<String, List<String>> board, int iterations, List<List<String>> rows) {
-    // var boardClass = Board();
-    // var mainBoard = boardClass.board;
-    // print('line 12 mainboard.values ${mainBoard.values}');
-  
+    final console = Console();
     final alien = Alien();
     alien.printBoard(board);
 
@@ -81,6 +80,8 @@ class Alien {
           
         // print the board
           alien.printBoard(board);
+        // clear the terminal screen
+          console.clearScreen();
         }
       } else {
         //shift right if the aliens are as far left as possible
@@ -89,6 +90,8 @@ class Alien {
         shiftAliensRight(rows[1]);
         // print the board
         alien.printBoard(board);
+        // clear the terminal screen
+        console.clearScreen();
       }
       // if the first available coordinate is an alien, then the aliens have made one
       // full shift to the left. Add that to the count.

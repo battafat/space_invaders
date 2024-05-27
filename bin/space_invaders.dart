@@ -10,17 +10,10 @@ void main() {
   var controlBoard = Board();
   final alien = Alien();
   Map<String, List<String>> board = controlBoard.board;
-  print('alienRow1 should = ${controlBoard.getRow(Board.alienRow1)}');
-  // List<List<String>> alienRows = [controlBoard.getRow(Board.alienRow1)!, controlBoard.getRow(Board.alienRow2)!];
   
   List<List<String>> alienRows = [board[Board.alienRow1]!, board[Board.alienRow2]!];
-  // aliensTraverseXaxis(board, 2, alienRows);
-  var row = alienRows[0];
-  print('initial row: ');
-  print(row);
 
-  alien.aliensTraverseXaxis(board, 3, alienRows);
-  print(board);
+  alien.aliensTraverseXaxis(board, 2, alienRows);
 
 
 
