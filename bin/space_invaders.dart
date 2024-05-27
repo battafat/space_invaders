@@ -8,6 +8,7 @@ import 'board.dart';
 void main() {
 // repeat, while the player is alive
   var controlBoard = Board();
+  final alien = Alien();
   Map<String, List<String>> board = controlBoard.board;
   print('alienRow1 should = ${controlBoard.getRow(Board.alienRow1)}');
   // List<List<String>> alienRows = [controlBoard.getRow(Board.alienRow1)!, controlBoard.getRow(Board.alienRow2)!];
@@ -18,13 +19,10 @@ void main() {
   print('initial row: ');
   print(row);
 
+  alien.aliensTraverseXaxis(board, 3, alienRows);
+  print(board);
 
 
-
-
-
-// TODO: write tests for left and right shift
-  // TODO: maybe you have to print out here?
 
 }
 

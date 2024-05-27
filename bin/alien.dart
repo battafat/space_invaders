@@ -64,14 +64,15 @@ class Alien {
 
     List<String> row = rows[0];
       // the last coordinate before the right-hand border
-    String lastSpot = row[row.length - 2];
+    int lastIndex = row.length - 2;
     int count = 0;
     while (count < iterations) {
-      if (lastSpot == Board.alien) {
+      if (row[lastIndex] == Board.alien) {
+        print("did it get to 71?");
         // once the aliens reach lastSpot, go left until they reach the firstSpot
         // while the aliens haven't yet reached the leftmost coordinate before the border
         while (row[1] != Board.alien) {
-          
+          print("did it get to 75");
         // shift left if the leftmost coordinate isn't an alien
           
           shiftAliensLeft(row);
@@ -94,7 +95,7 @@ class Alien {
         for (var r in board.values) {
           print(r.join(' '));
         }
-        // count = 2;
+        count += 1;
       }
       // if the first available coordinate is an alien, then the aliens have made one
       // full shift to the left. Add that to the count.
