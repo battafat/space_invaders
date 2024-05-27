@@ -24,74 +24,15 @@ void main() {
 
 
 // TODO: write tests for left and right shift
-  // Map<String, List<String>> printableLeft = shiftAliensLeft(board, row);
-  // for (var y in board.values){
-  //   print(y);
-  // }
-
-  for (var i = 0; i < 2; i++){
-    shiftAliensRight(board, row);
-  }
-  print("align right: ");
-  print(board.values);
-  for (var i = 0; i < 4; i++){
-    shiftAliensLeft(board, row);
-    print(board.values.first);
-  }
-  print('align left: ');
-  print(board.values);
-
-  // Map<String, List<String>> printableRight = shiftAliensRight(board, row);
-  // print("board: ");
-  // for (var x in board.values){
-  //   print(x);
-  // }
-  // print("printableRight: ");
-  // for (var inst in printableRight.values) {
-  //   print(inst);
-  // }
-  // printableRight = shiftAliensRight(printableRight, row);
-  // for (var inst in printableRight.values) {
-  //   print(inst);
-  // }
   // TODO: maybe you have to print out here?
 
 }
 
-// blank space
-// aliens
-//
-// vertex needs coordinates and
 
 
 
-// class Directions {
-
-//   String left = 's';
-//   String right = 'f';
-//   var direction = Directions();
-//   List<int> assignMove(input) {
-//     if (String input == Directions.left){
-//       return [0, -1];
-//     }
-//     else if (String input == Directions.right){
-//       return [0, 1];
-//     }
-//     else{
-//       return [0, 0];
-//     }
-//   }
 
 
   
 
 
-//   String checkMove() async {
-//     // var line = stdin.readLineSync();
-//     var line = stdin.asBroadcastStream(onListen: );
-//     print(line?.trim() == 'f' ? 'moved right!' : 'Nope :(');
-//     return line?.
-
-//   }
-  
-// }

@@ -10,25 +10,25 @@ void main (){
   // So leftmost possible alien coordinate is row[1].
   // And rightmost possible alien coordinate is row[row.len - 2].
   group('alienShiftRight tests', (){
-    test('alienShiftRight called when already rightmost aligned', (){
+    test('shiftAliensRight called when already rightmost aligned', (){
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
       const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
       expect(alien.shiftAliensRight(alienRow1), updatedRow);
     });
-    test('aliensShiftRight aliens start row[1]', () {
+    test('shiftAliensRight, aliens start row[1]', () {
       final alien = Alien();
       final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
       const updatedRow = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
       expect(alien.shiftAliensRight(alienRow1), updatedRow);
     });
-    test('aliensShiftRight aliens start row[2]', () {
+    test('aliensShiftRight, aliens start row[2]', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
       const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
       expect(alien.shiftAliensRight(alienRow1), updatedRow);
     });
-    test('alienShiftRight aliens start row[3]', () {
+    test('shiftAliensRight, aliens start row[3]', () {
       final alien = Alien();
       final boardClass = Board();
       final board = boardClass.board;
@@ -37,7 +37,7 @@ void main (){
       expect(alien.shiftAliensRight(alienRow1!), updatedRow);
     });
 
-    test('aliensShiftRight aliens start row[4]', (){
+    test('shiftAliensRight, aliens start row[4]', (){
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
       const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
@@ -47,31 +47,31 @@ void main (){
   });
 
   group('shiftAliensLeft tests', (){
-    test('alienShiftLeft called when rightmost aligned', () {
+    test('shiftAliensLeft called when rightmost aligned', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
       const updatedRow = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
       expect(alien.shiftAliensLeft(alienRow1), updatedRow);
     });
-    test('aliensShiftLeft aliens start row[4]', () {
+    test('shiftAliensLeft aliens start row[4]', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
       const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
       expect(alien.shiftAliensLeft(alienRow1), updatedRow);
     });
-    test('alienShiftLeft aliens start row[3]', () {
+    test('shiftAliensLeft aliens start row[3]', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
       const updatedRow = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
       expect(alien.shiftAliensLeft(alienRow1), updatedRow);
     });
-    test('aliensShiftLeft, aliens start row[2]', () {
+    test('shiftAliensLeft, aliens start row[2]', () {
       final alien = Alien();
       final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
       const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
       expect(alien.shiftAliensLeft(alienRow1), updatedRow);
     });
-    test('aliensShiftLeft, aliens start row[1], leftmost aligned', () {
+    test('shiftAliensLeft, aliens start row[1], leftmost aligned', () {
       final alien = Alien();
       final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
       const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
