@@ -63,19 +63,20 @@ class Alien {
     final console = Console();
     final alien = Alien();
 
-            // print the board
-    alien.printBoard(board);
-    // pause the program before clearing the screen.
-    // Otherwise, the screen disappears too quickly.
-    sleep(Duration(seconds: 2));
-    // Uses ANSI codes to erase the terminal display and reset the cursor.
-    console.clearScreen();
 
     List<String> row = rows[0];
       // the last coordinate before the right-hand border
     int rightmostIndex = row.length - 2;
     int count = 0;
     while (count < iterations) {
+      // print the board
+      alien.printBoard(board);
+      // pause the program before clearing the screen.
+      // Otherwise, the screen disappears too quickly.
+      sleep(Duration(seconds: 2));
+      // Uses ANSI codes to erase the terminal display and reset the cursor.
+      console.clearScreen();
+
       if (row[rightmostIndex] == Board.alien) {
         // once the aliens reach lastSpot, go left until they reach the firstSpot
         // while the aliens haven't yet reached the leftmost coordinate before the border
@@ -99,7 +100,6 @@ class Alien {
         shiftAliensRight(row);
         shiftAliensRight(rows[1]);
         // print the board
-        // print the board
         alien.printBoard(board);
         // pause the program before clearing the screen.
         // Otherwise, the screen disappears too quickly.
@@ -121,6 +121,7 @@ class Alien {
       print(r.join(' '));
     }
   }
+
 
   
 }
