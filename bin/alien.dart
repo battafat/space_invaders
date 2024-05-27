@@ -1,5 +1,5 @@
 import "package:dart_console/dart_console.dart";
-
+import 'dart:io';
 import "board.dart";
 
 // function goes through the alien rows and shifts them right and then left across
@@ -62,7 +62,14 @@ class Alien {
   Map<String, List<String>> aliensTraverseXaxis(Map<String, List<String>> board, int iterations, List<List<String>> rows) {
     final console = Console();
     final alien = Alien();
+
+            // print the board
     alien.printBoard(board);
+    // pause the program before clearing the screen.
+    // Otherwise, the screen disappears too quickly.
+    sleep(Duration(seconds: 2));
+    // Uses ANSI codes to erase the terminal display and reset the cursor.
+    console.clearScreen();
 
     List<String> row = rows[0];
       // the last coordinate before the right-hand border
@@ -80,7 +87,10 @@ class Alien {
           
         // print the board
           alien.printBoard(board);
-        // clear the terminal screen
+        // pause the program before clearing the screen.
+        // Otherwise, the screen disappears too quickly.
+          sleep(Duration(seconds: 2));
+        // Uses ANSI codes to erase the terminal display and reset the cursor.
           console.clearScreen();
         }
       } else {
@@ -89,8 +99,12 @@ class Alien {
         shiftAliensRight(row);
         shiftAliensRight(rows[1]);
         // print the board
+        // print the board
         alien.printBoard(board);
-        // clear the terminal screen
+        // pause the program before clearing the screen.
+        // Otherwise, the screen disappears too quickly.
+        sleep(Duration(seconds: 2));
+        // Uses ANSI codes to erase the terminal display and reset the cursor.
         console.clearScreen();
       }
       // if the first available coordinate is an alien, then the aliens have made one

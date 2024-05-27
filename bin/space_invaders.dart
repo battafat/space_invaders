@@ -14,9 +14,6 @@ void main() {
   List<List<String>> alienRows = [board[Board.alienRow1]!, board[Board.alienRow2]!];
 
   alien.aliensTraverseXaxis(board, 2, alienRows);
-
-
-
 }
 
 
