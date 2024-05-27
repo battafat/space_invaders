@@ -61,27 +61,26 @@ class Alien {
     // var boardClass = Board();
     // var mainBoard = boardClass.board;
     // print('line 12 mainboard.values ${mainBoard.values}');
+  
+    final alien = Alien();
+    alien.printBoard(board);
 
     List<String> row = rows[0];
       // the last coordinate before the right-hand border
-    int lastIndex = row.length - 2;
+    int rightmostIndex = row.length - 2;
     int count = 0;
     while (count < iterations) {
-      if (row[lastIndex] == Board.alien) {
-        print("did it get to 71?");
+      if (row[rightmostIndex] == Board.alien) {
         // once the aliens reach lastSpot, go left until they reach the firstSpot
         // while the aliens haven't yet reached the leftmost coordinate before the border
         while (row[1] != Board.alien) {
-          print("did it get to 75");
         // shift left if the leftmost coordinate isn't an alien
           
           shiftAliensLeft(row);
           shiftAliensLeft(rows[1]);
           
         // print the board
-          for (var r in board.values) {
-            print(r.join(' '));
-          }
+          alien.printBoard(board);
         }
       } else {
         //shift right if the aliens are as far left as possible
@@ -89,11 +88,7 @@ class Alien {
         shiftAliensRight(row);
         shiftAliensRight(rows[1]);
         // print the board
-        print('boardClass.board: ');
-        for (var r in board.values) {
-          print(r.join(' '));
-        }
-        // count += 1;
+        alien.printBoard(board);
       }
       // if the first available coordinate is an alien, then the aliens have made one
       // full shift to the left. Add that to the count.
@@ -102,6 +97,12 @@ class Alien {
       }
     }
     return board;
+  }
+
+  void printBoard(board){
+    for (var r in board.values) {
+      print(r.join(' '));
+    }
   }
 
   

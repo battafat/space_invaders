@@ -30,8 +30,9 @@ class Board {
 
 
   void displayBoard(board) {
-    print('line 120 ${board["alienRow"]}');
-    // print(board.values.join(' '));
+    for (var r in board.values) {
+      print(r.join(' '));
+    }
   }
 }
 
