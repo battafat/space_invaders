@@ -76,6 +76,7 @@ class Alien {
         // shift left if the leftmost coordinate isn't an alien
           
           shiftAliensLeft(row);
+          shiftAliensLeft(rows[1]);
           
         // print the board
           for (var r in board.values) {
@@ -86,16 +87,13 @@ class Alien {
         //shift right if the aliens are as far left as possible
         
         shiftAliensRight(row);
+        shiftAliensRight(rows[1]);
         // print the board
-        print('mainboard: ');
-        for (var r in board.values) {
-          print(r.join(' '));
-        }
         print('boardClass.board: ');
         for (var r in board.values) {
           print(r.join(' '));
         }
-        count += 1;
+        // count += 1;
       }
       // if the first available coordinate is an alien, then the aliens have made one
       // full shift to the left. Add that to the count.
