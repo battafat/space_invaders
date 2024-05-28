@@ -5,7 +5,6 @@ class Player {
 
   String left = 's';
   String right = 'f';
-  var direction = Player();
 
 
   List<String> moveRight(List<String> row){
@@ -37,21 +36,21 @@ class Player {
     }
     return row;
   }
-  
-  List<int> assignMove(input) {
+}  
+//   List<int> assignMove(input) {
     
-    if (String input == Directions.left){
-      return [0, -1];
-    }
-    else if (String input == Directions.right){
-      return [0, 1];
-    }
-    else{
-      return [0, 0];
-    }
-  }
+//     if (String input == Directions.left){
+//       return [0, -1];
+//     }
+//     else if (String input == Directions.right){
+//       return [0, 1];
+//     }
+//     else{
+//       return [0, 0];
+//     }
+//   }
 
-}
+// }
 
 //   String checkMove() async {
 //     // var line = stdin.readLineSync();
