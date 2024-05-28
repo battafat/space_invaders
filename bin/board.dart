@@ -2,6 +2,7 @@ class Board {
   static const space = ' ';
   static const alien = '@';
   static const border = '|';
+  static const player = '^';
 
   static const alienRow1 = "alienRow1";
   static const alienRow2 = "alienRow2";
