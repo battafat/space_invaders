@@ -55,7 +55,15 @@ class Player {
       }
       return row;
     }
-
+  List<String> playerMove(List<String> row, String move){
+    if (move == right){
+      return moveRight(row);
+    }
+    if (move == left){
+      return moveLeft(row);
+    }
+    return row;
+  }
 }  
 //   List<int> assignMove(input) {
     
