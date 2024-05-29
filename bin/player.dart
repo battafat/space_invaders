@@ -1,4 +1,5 @@
 
+import 'dart:io';
 import 'board.dart';
 
 class Player {
@@ -65,27 +66,20 @@ class Player {
     return row;
   }
 }  
-//   List<int> assignMove(input) {
-    
-//     if (String input == Directions.left){
-//       return [0, -1];
-//     }
-//     else if (String input == Directions.right){
-//       return [0, 1];
-//     }
-//     else{
-//       return [0, 0];
-//     }
-//   }
+// https://api.flutter.dev/flutter/services/LogicalKeyboardKey-class.html
 
-// }
+  // Future<String> checkMove() async {
+  //   // var line = stdin.readLineSync();
+  //   final controlBoard = Board();
+  //   final row = controlBoard.board[Board.playerRow];
 
-//   String checkMove() async {
-//     // var line = stdin.readLineSync();
-//     var line = stdin.asBroadcastStream(onListen: );
-//     print(line?.trim() == 'f' ? 'moved right!' : 'Nope :(');
-//     return line?.
+  //   var line = stdin.asBroadcastStream(onListen: Future.value);
+  //   print(line?.trim() == 'f' ? 'moved right!' : 'Nope :(');
+  //   return line?;
 
-//   }
+  // }
+
+  // final controlBoard = Board();
+  //   final row = controlBoard.board[Board.playerRow];
   
 // }

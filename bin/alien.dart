@@ -69,13 +69,6 @@ class Alien {
     int rightmostIndex = row.length - 2;
     int count = 0;
     while (count < iterations) {
-      // // print the board
-      // alien.printBoard(board);
-      // // pause the program before clearing the screen.
-      // // Otherwise, the screen disappears too quickly.
-      // sleep(Duration(seconds: 2));
-      // // Uses ANSI codes to erase the terminal display and reset the cursor.
-      // console.clearScreen();
 
       if (row[rightmostIndex] == Board.alien) {
         // once the aliens reach lastSpot, go left until they reach the firstSpot
@@ -86,26 +79,16 @@ class Alien {
           shiftAliensLeft(row);
           shiftAliensLeft(rows[1]);
           
-        // print the board
-          alien.printBoard(board);
-        // pause the program before clearing the screen.
-        // Otherwise, the screen disappears too quickly.
-          sleep(Duration(seconds: 2));
-        // Uses ANSI codes to erase the terminal display and reset the cursor.
-          // console.clearScreen();
+        resetFrame(board);
         }
       } else {
         //shift right if the aliens are as far left as possible
         
         shiftAliensRight(row);
         shiftAliensRight(rows[1]);
-        // print the board
-        alien.printBoard(board);
-        // pause the program before clearing the screen.
-        // Otherwise, the screen disappears too quickly.
-        sleep(Duration(seconds: 2));
-        // Uses ANSI codes to erase the terminal display and reset the cursor.
-        // console.clearScreen();
+
+        resetFrame(board);
+        
       }
       // if the first available coordinate is an alien, then the aliens have made one
       // full shift to the left. Add that to the count.
@@ -121,7 +104,17 @@ class Alien {
       print(r.join(' '));
     }
   }
-
+  void resetFrame(board){
+    final alien = Alien();
+    final console = Console();
+    // print the board
+    alien.printBoard(board);
+    // pause the program before clearing the screen.
+    // Otherwise, the screen disappears too quickly.
+    sleep(Duration(seconds: 2));
+    // Uses ANSI codes to erase the terminal display and reset the cursor.
+    console.clearScreen();
+  }
 
   
 }
