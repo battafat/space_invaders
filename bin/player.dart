@@ -1,11 +1,13 @@
 
+import 'dart:async';
 import 'dart:io';
 import 'board.dart';
+import 'key_types.dart';
 
 class Player {
 
-  String left = 's';
-  String right = 'f';
+  KeyTypes left = KeyTypes.left;
+  KeyTypes right = KeyTypes.right;
 
 
   List<String> moveRight(List<String> row){
@@ -56,30 +58,31 @@ class Player {
       }
       return row;
     }
-  List<String> playerMove(List<String> row, String move){
+  List<String> checkMove(List<String> playerRow, KeyTypes move){
     if (move == right){
-      return moveRight(row);
+      return moveRight(playerRow);
     }
     if (move == left){
-      return moveLeft(row);
+      return moveLeft(playerRow);
     }
-    return row;
+    return playerRow;
   }
-}  
+  
+
+
+  
 // https://api.flutter.dev/flutter/services/LogicalKeyboardKey-class.html
 
-  // Future<String> checkMove() async {
-  //   // var line = stdin.readLineSync();
-  //   final controlBoard = Board();
-  //   final row = controlBoard.board[Board.playerRow];
-
-  //   var line = stdin.asBroadcastStream(onListen: Future.value);
-  //   print(line?.trim() == 'f' ? 'moved right!' : 'Nope :(');
-  //   return line?;
+  // String playerMove (playerRow){
+  //   var move = stdin.readLineSync();    
+  //   // var move = stdin.asBroadcastStream(onListen: Future.value);
+  //   // print(line?.trim() == 'f' ? 'moved right!' : 'Nope :(');
+  //   // result = player. ('f ? player.moveRight(row) : 'Nope :(');
+  //   return move!;
 
   // }
-
+}
   // final controlBoard = Board();
-  //   final row = controlBoard.board[Board.playerRow];
+  //   final playerRow = controlBoard.board[Board.playerRow];
   
 // }
