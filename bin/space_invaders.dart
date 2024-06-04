@@ -9,15 +9,18 @@ import 'key_types.dart';
 import 'player.dart';
 import 'user_input.dart';
 
+late final StreamSubscription<List<int>> stdinStreamSubscription;
 
 void main() async{
   var controlBoard = Board();
   final alien = Alien();
   final player = Player();
   final rowName = Board.playerRow;
-  late final StreamSubscription<List<int>> stdinStreamSubscription;
+  stdinStreamSubscription = stdin.listen((event) { });
+  // late final StreamSubscription<List<int>> stdinStreamSubscription;
   Map<String, List<String>> board = controlBoard.board;
-  List<String>? playerRow = board[rowName];
+  // List<String>? playerRow = board[rowName];
+  
 
   
   List<List<String>> alienRows = [
