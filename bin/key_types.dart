@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 
+import 'board.dart';
+import 'player.dart';
 import 'user_input.dart';
 enum KeyTypes {
   up([27, 91, 65, 10]),
@@ -31,15 +33,22 @@ class KeystrokeStream {
     _controller = StreamController<List<int>>(
         onListen: _startStream,
         onResume: _startStream,
-        onPause: _stopTimer,
-        onCancel: _stopTimer);
+        onPause: _pauseStdin,
+        // onCancel: _stopTimer
+        );
   }
    
-  void _startStream(playerRow){
-    stdin.listen((keyValues) {
-    final key = KeyTypes.fromValue(keyValues);
-    final updatedPlayerRow = handleKeyEvent(key, playerRow!);
-    print(updatedPlayerRow);
-    });
+  void _startStream(){
+    final board = Board().board;
+    final playerRow = board[Board.playerRow];
+    // stdin.listen((keyValues) {
+
+    // });
   }
+
+  void _pauseStdin(){
+    
+  }
+
+  Stream<List<int>> get stream => _controller.stream;
 }
