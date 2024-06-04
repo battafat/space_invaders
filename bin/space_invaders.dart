@@ -21,7 +21,11 @@ void main() async{
     board[Board.alienRow2]!
   ];
 
-  stdinStreamSubscription = stdin.listen((event) { });
+  stdinStreamSubscription = stdin.listen((event) {
+      final key = KeyTypes.fromValue(event);
+      handleKeyEvent(key, board[Board.playerRow]!);
+      print(key);
+      });
   alien.aliensTraverseXaxis(board, 2, alienRows);
 }
 

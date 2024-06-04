@@ -113,29 +113,13 @@ class Alien {
     
     final alien = Alien();
     final console = Console();
-    // final stream = KeystrokeStream().stream;
-    // stream.listen((event) {
-    //   final key = KeyTypes.fromValue(event);
-      
-    // });
-    
-    // stdinStreamSubscription.pause();
-    // stdinStreamSubscription.onData((data) {
-    //   final key = KeyTypes.fromValue(data);
-    //   handleKeyEvent(key, board[Board.playerRow]!);
-    //   print(key);
-    //   });
-    
-    
-    
-    
     // print the board
     alien.printBoard(board);
     // pause the program before clearing the screen.
     // Otherwise, the screen disappears too quickly.
-    sleep(Duration(seconds: 2));
+    // sleep(Duration(seconds: 2));
     // Uses ANSI codes to erase the terminal display and reset the cursor.
     console.clearScreen();
-    stdinStreamSubscription.resume();
+    // stdinStreamSubscription.resume();
   }
 }
