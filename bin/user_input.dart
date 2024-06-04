@@ -16,7 +16,7 @@ List<String> handleKeyEvent(KeyTypes key, List<String> playerRow ){
     // print(playerRow);
   }
   else{
-    print('only left and right arrows allowed');
+    print('Neither left nor right entered');
   }
   return playerRow;
 }

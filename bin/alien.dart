@@ -110,7 +110,7 @@ class Alien {
   }
 
   void resetFrame(board) {
-    final board = Board().board;
+    
     final alien = Alien();
     final console = Console();
     // final stream = KeystrokeStream().stream;
@@ -119,11 +119,13 @@ class Alien {
       
     // });
     
-    stdinStreamSubscription.pause();
-    stdinStreamSubscription.onData((data) {
-      final key = KeyTypes.fromValue(data);
-      handleKeyEvent(key, board[Board.playerRow]!);
-      });
+    // stdinStreamSubscription.pause();
+    // stdinStreamSubscription.onData((data) {
+    //   final key = KeyTypes.fromValue(data);
+    //   handleKeyEvent(key, board[Board.playerRow]!);
+    //   print(key);
+    //   });
+    
     
     
     

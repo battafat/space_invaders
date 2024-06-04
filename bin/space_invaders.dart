@@ -12,39 +12,17 @@ import 'user_input.dart';
 late final StreamSubscription<List<int>> stdinStreamSubscription;
 
 void main() async{
+  // TODO: add reset command at beginning to make sure terminal is clear
   var controlBoard = Board();
   final alien = Alien();
-  final player = Player();
-  final rowName = Board.playerRow;
-  stdinStreamSubscription = stdin.listen((event) { });
-  // late final StreamSubscription<List<int>> stdinStreamSubscription;
   Map<String, List<String>> board = controlBoard.board;
-  // List<String>? playerRow = board[rowName];
-  
-
-  
   List<List<String>> alienRows = [
     board[Board.alienRow1]!,
     board[Board.alienRow2]!
   ];
-  
-  
-// repeat, while the player is alive
-  
-  // TODO: add ANSI for reset command at beginning to make sure terminal is clear
-  // or whatever command is appropriate
-  
-  
-  // }
-  
 
-  
-  // final playerRow = controlBoard.board[Board.playerRow];
-  // var move = player.playerMove;
-  // player.checkMove(playerRow!, move.toString());
+  stdinStreamSubscription = stdin.listen((event) { });
   alien.aliensTraverseXaxis(board, 2, alienRows);
-  // print(move);
-
 }
 
 
