@@ -11,7 +11,7 @@ import 'user_input.dart';
 
 late final StreamSubscription<List<int>> stdinStreamSubscription;
 
-void main() async{
+void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   var controlBoard = Board();
   final alien = Alien();
@@ -20,13 +20,17 @@ void main() async{
     board[Board.alienRow1]!,
     board[Board.alienRow2]!
   ];
-
+  
+  // stdin.lineMode = false;
   stdinStreamSubscription = stdin.listen((event) {
       final key = KeyTypes.fromValue(event);
       handleKeyEvent(key, board[Board.playerRow]!);
-      print(key);
+      
+      // print(key);
+      print(board[Board.playerRow]!.join(' '));
       });
-  alien.aliensTraverseXaxis(board, 2, alienRows);
+  alien.aliensTraverseXaxis(2, alienRows);
+  print(board);
 }
 
 

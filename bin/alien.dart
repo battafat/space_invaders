@@ -64,17 +64,19 @@ class Alien {
 // all shift left until the leftmost alien occupies the leftmost index next to the border (row[1]).
 
   Map<String, List<String>> aliensTraverseXaxis(
-      Map<String, List<String>> board,
+      // Map<String, List<String>> board,
       int iterations,
       List<List<String>> rows,
       ) {
-    
+    final controlBoard = Board();
+    Map<String, List<String>> board = controlBoard.board;
 
     List<String> row = rows[0];
     // the last coordinate before the right-hand border
     int rightmostIndex = row.length - 2;
     int count = 0;
-    resetFrame(board);
+    // resetFrame(board);
+    // resetFrame();
     while (count < iterations) {
       if (row[rightmostIndex] == Board.alien) {
         // once the aliens reach lastSpot, go left until they reach the firstSpot
@@ -85,6 +87,7 @@ class Alien {
           shiftAliensLeft(row);
           shiftAliensLeft(rows[1]);
 
+          // resetFrame(board);
           resetFrame(board);
         }
       } else {
@@ -92,6 +95,8 @@ class Alien {
         shiftAliensRight(row);
         shiftAliensRight(rows[1]);
 
+        // resetFrame(board);
+        
         resetFrame(board);
       }
       // if the first available coordinate is an alien, then the aliens have made one
@@ -109,17 +114,19 @@ class Alien {
     }
   }
 
-  void resetFrame(board) {
-    
-    final alien = Alien();
-    final console = Console();
-    // print the board
-    alien.printBoard(board);
-    // pause the program before clearing the screen.
-    // Otherwise, the screen disappears too quickly.
-    // sleep(Duration(seconds: 2));
-    // Uses ANSI codes to erase the terminal display and reset the cursor.
-    console.clearScreen();
-    // stdinStreamSubscription.resume();
+  // void resetFrame(board) {
+    void resetFrame(board) {
+      // final board = Board().board;
+      final alien = Alien();
+      final console = Console();
+      print(Board().board);
+      // print the board
+      alien.printBoard(board);
+      // pause the program before clearing the screen.
+      // Otherwise, the screen disappears too quickly.
+      sleep(Duration(seconds: 1));
+      // Uses ANSI codes to erase the terminal display and reset the cursor.
+      console.clearScreen();
+      // stdinStreamSubscription.resume();
   }
 }
