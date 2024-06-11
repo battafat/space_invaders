@@ -7,9 +7,13 @@ import "key_types.dart";
 import "user_input.dart";
 
 class Alien {
+  final board = Board().board;
+  // final alienRow1 = board[Board.alienRow1]; 
+  
   // iterates through the row in reverse, setting each index equal to
   // the previous index.
   List<String> shiftAliensRight(List<String> row) {
+    
     int rightmostIndex = row.length - 2;
     if (row[rightmostIndex] == Board.alien) {
       // TODO: include error or throw. return row, but show an error, but not to user?
@@ -64,12 +68,11 @@ class Alien {
 // all shift left until the leftmost alien occupies the leftmost index next to the border (row[1]).
 
   Map<String, List<String>> aliensTraverseXaxis(
-      // Map<String, List<String>> board,
+      Map<String, List<String>> board,
       int iterations,
       List<List<String>> rows,
       ) {
-    final controlBoard = Board();
-    Map<String, List<String>> board = controlBoard.board;
+    
 
     List<String> row = rows[0];
     // the last coordinate before the right-hand border
@@ -104,6 +107,7 @@ class Alien {
       if (row[1] == Board.alien) {
         count += 1;
       }
+      
     }
     return board;
   }
@@ -116,10 +120,8 @@ class Alien {
 
   // void resetFrame(board) {
     void resetFrame(board) {
-      // final board = Board().board;
       final alien = Alien();
       final console = Console();
-      print(Board().board);
       // print the board
       alien.printBoard(board);
       // pause the program before clearing the screen.

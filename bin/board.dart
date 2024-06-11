@@ -30,7 +30,7 @@ class Board {
   }
 
 
-  void displayBoard(board) {
+  void displayBoard() {
     for (var r in board.values) {
       print(r.join(' '));
     }

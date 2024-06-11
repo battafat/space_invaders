@@ -15,12 +15,14 @@ void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   var controlBoard = Board();
   final alien = Alien();
+
   Map<String, List<String>> board = controlBoard.board;
   List<List<String>> alienRows = [
     board[Board.alienRow1]!,
     board[Board.alienRow2]!
   ];
-  
+  // attempted (incomplete) solution to 
+  // input user keystrokes without pressing enter:
   // stdin.lineMode = false;
   stdinStreamSubscription = stdin.listen((event) {
       final key = KeyTypes.fromValue(event);
@@ -29,7 +31,7 @@ void main() async {
       // print(key);
       print(board[Board.playerRow]!.join(' '));
       });
-  alien.aliensTraverseXaxis(2, alienRows);
+  alien.aliensTraverseXaxis(board, 2, alienRows);
   print(board);
 }
 
