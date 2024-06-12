@@ -25,14 +25,14 @@ void main() async {
   // input user keystrokes without pressing enter:
   // stdin.lineMode = false;
   stdinStreamSubscription = stdin.listen((event) {
+    print(event.toString());
     final key = KeyTypes.fromValue(event);
     handleKeyEvent(key, board[Board.playerRow]!);
-
-    // print(key);
+    print(key);
     print(board[Board.playerRow]!.join(' '));
   });
 
-  alien.aliensTraverseXaxis(board, 2, alienRows);
+  alien.aliensTraverseXaxis(board, 1, alienRows);
   print(board);
   // stdinStreamSubscription.cancel();
 

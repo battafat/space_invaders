@@ -7,10 +7,10 @@ import 'board.dart';
 import 'player.dart';
 import 'user_input.dart';
 enum KeyTypes {
-  up([27, 91, 65, 10]),
-  down([27, 91, 66, 10]),
-  left([27, 91, 68, 10]),
-  right([27, 91, 67, 10]),
+  up([101, 10]), // e
+  down([100, 10]), // d
+  left([115, 10]), // s
+  right([102, 10]), // f
   backspace([32, 10]),
   unknown([]),
   ;
