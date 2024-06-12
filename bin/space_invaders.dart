@@ -21,25 +21,22 @@ void main() async {
     board[Board.alienRow1]!,
     board[Board.alienRow2]!
   ];
-  // attempted (incomplete) solution to 
+  // attempted (incomplete) solution to
   // input user keystrokes without pressing enter:
   // stdin.lineMode = false;
   stdinStreamSubscription = stdin.listen((event) {
-      final key = KeyTypes.fromValue(event);
-      handleKeyEvent(key, board[Board.playerRow]!);
-      
-      // print(key);
-      print(board[Board.playerRow]!.join(' '));
-      });
+    final key = KeyTypes.fromValue(event);
+    handleKeyEvent(key, board[Board.playerRow]!);
+
+    // print(key);
+    print(board[Board.playerRow]!.join(' '));
+  });
+
   alien.aliensTraverseXaxis(board, 2, alienRows);
   print(board);
+  // stdinStreamSubscription.cancel();
+
+  // makes sure the buffer is flushed so that terminal
+  // doesn't print previous game's output
+  stdout.flush();
 }
-
-
-
-
-
-
-  
-
-

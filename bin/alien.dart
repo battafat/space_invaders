@@ -8,12 +8,11 @@ import "user_input.dart";
 
 class Alien {
   final board = Board().board;
-  // final alienRow1 = board[Board.alienRow1]; 
-  
+  // final alienRow1 = board[Board.alienRow1];
+
   // iterates through the row in reverse, setting each index equal to
   // the previous index.
   List<String> shiftAliensRight(List<String> row) {
-    
     int rightmostIndex = row.length - 2;
     if (row[rightmostIndex] == Board.alien) {
       // TODO: include error or throw. return row, but show an error, but not to user?
@@ -68,12 +67,10 @@ class Alien {
 // all shift left until the leftmost alien occupies the leftmost index next to the border (row[1]).
 
   Map<String, List<String>> aliensTraverseXaxis(
-      Map<String, List<String>> board,
-      int iterations,
-      List<List<String>> rows,
-      ) {
-    
-
+    Map<String, List<String>> board,
+    int iterations,
+    List<List<String>> rows,
+  ) {
     List<String> row = rows[0];
     // the last coordinate before the right-hand border
     int rightmostIndex = row.length - 2;
@@ -86,7 +83,8 @@ class Alien {
         // while the aliens haven't yet reached the leftmost coordinate before the border
         while (row[1] != Board.alien) {
           // shift left if the leftmost coordinate isn't an alien
-
+          // for (var i = 0; i < rows.length; i++){
+          //   shiftAliensLeft(rows[i]);}
           shiftAliensLeft(row);
           shiftAliensLeft(rows[1]);
 
@@ -99,7 +97,7 @@ class Alien {
         shiftAliensRight(rows[1]);
 
         // resetFrame(board);
-        
+
         resetFrame(board);
       }
       // if the first available coordinate is an alien, then the aliens have made one
@@ -107,8 +105,12 @@ class Alien {
       if (row[1] == Board.alien) {
         count += 1;
       }
-      
     }
+    // reset the terminal
+    print('\x1Bc');
+    
+    // stdout.flush() didn't seem to work here
+    
     return board;
   }
 
@@ -119,16 +121,17 @@ class Alien {
   }
 
   // void resetFrame(board) {
-    void resetFrame(board) {
-      final alien = Alien();
-      final console = Console();
-      // print the board
-      alien.printBoard(board);
-      // pause the program before clearing the screen.
-      // Otherwise, the screen disappears too quickly.
-      sleep(Duration(seconds: 1));
-      // Uses ANSI codes to erase the terminal display and reset the cursor.
-      console.clearScreen();
-      // stdinStreamSubscription.resume();
+  void resetFrame(board) {
+    final alien = Alien();
+    // final console = Console();
+    // print the board
+    alien.printBoard(board);
+    // pause the program before clearing the screen.
+    // Otherwise, the screen disappears too quickly.
+    sleep(Duration(seconds: 1));
+    // Uses ANSI codes to erase the terminal display and reset the cursor.
+    // console.clearScreen();
+    print('\x1B[2J\x1B[H');
+    // stdinStreamSubscription.resume();
   }
 }
