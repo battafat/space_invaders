@@ -5,8 +5,8 @@ import 'player.dart';
 
 
 
-List<String> handleKeyEvent(KeyTypes key, List<String> playerRow ){
-  final player = Player();
+List<String> handleKeyEvent(KeyTypes key, List<String> playerRow, Player player ){
+  // final player = Player();
   if (key == KeyTypes.right){
     return player.checkMove(playerRow, key);
   // print(playerRow);

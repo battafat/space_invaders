@@ -25,7 +25,7 @@ enum KeyTypes {
       orElse: () => unknown,
     );
   }
-}
+}  
 
 class KeystrokeStream {
   late StreamController<List<int>> _controller;

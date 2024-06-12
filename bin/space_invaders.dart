@@ -15,8 +15,11 @@ void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   var controlBoard = Board();
   final alien = Alien();
-
+  final player = Player();
+  stdout.flush();
+  
   Map<String, List<String>> board = controlBoard.board;
+  var playerRow = board[Board.playerRow];
   List<List<String>> alienRows = [
     board[Board.alienRow1]!,
     board[Board.alienRow2]!
@@ -24,11 +27,12 @@ void main() async {
   // attempted (incomplete) solution to
   // input user keystrokes without pressing enter:
   // stdin.lineMode = false;
+  List<int> buffer = []; // Buffer to accumulate key press bytes
   stdinStreamSubscription = stdin.listen((event) {
     print(event.toString());
     final key = KeyTypes.fromValue(event);
-    handleKeyEvent(key, board[Board.playerRow]!);
-    print(key);
+    handleKeyEvent(key, board[Board.playerRow]!, player);
+    print('key = $key');
     print(board[Board.playerRow]!.join(' '));
   });
 
