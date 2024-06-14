@@ -28,9 +28,9 @@ enum KeyTypes {
 }  
 
 class KeystrokeStream {
-  late StreamController<List<int>> _controller;
+  late StreamController<Map<String, List<String>>> _controller;
   KeystrokeStream(){
-    _controller = StreamController<List<int>>(
+    _controller = StreamController<Map<String, List<String>>>(
         onListen: _startStream,
         onResume: _startStream,
         onPause: _pauseStdin,
@@ -50,5 +50,5 @@ class KeystrokeStream {
     
   }
 
-  Stream<List<int>> get stream => _controller.stream;
+  Stream<Map<String, List<String>>> get stream => _controller.stream;
 }

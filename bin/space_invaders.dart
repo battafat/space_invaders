@@ -28,16 +28,20 @@ void main() async {
   // input user keystrokes without pressing enter:
   // stdin.lineMode = false;
   List<int> buffer = []; // Buffer to accumulate key press bytes
+  // StreamController<Map<String, List<String>>> streamController = StreamController<Map<String, List<String>>>();
+  
+  StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
+  //TODO: look up in dart_complete_reference how to use the stream controller
   stdinStreamSubscription = stdin.listen((event) {
-    print(event.toString());
-    final key = KeyTypes.fromValue(event);
-    handleKeyEvent(key, board[Board.playerRow]!, player);
-    print('key = $key');
-    print(board[Board.playerRow]!.join(' '));
+    // print('event ${event.toString()}');
+    // final key = KeyTypes.fromValue(event);
+    // handleKeyEvent(key, playerRow!, player);
+    // print('key = $key');
+    // print(playerRow.join(' '));
+    streamController.add(event); // Send the update signal
   });
-
-  alien.aliensTraverseXaxis(board, 1, alienRows);
-  print(board);
+  
+  alien.aliensTraverseXaxis(board, 2, alienRows, streamController);
   // stdinStreamSubscription.cancel();
 
   // makes sure the buffer is flushed so that terminal

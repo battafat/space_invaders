@@ -1,4 +1,5 @@
 import "dart:async";
+import "player.dart";
 import "space_invaders.dart";
 import "package:dart_console/dart_console.dart";
 import 'dart:io';
@@ -66,11 +67,12 @@ class Alien {
 // to the right ends up in the row's rightmost index before the border. And then the aliens
 // all shift left until the leftmost alien occupies the leftmost index next to the border (row[1]).
 
-  Map<String, List<String>> aliensTraverseXaxis(
+  void aliensTraverseXaxis (
     Map<String, List<String>> board,
     int iterations,
     List<List<String>> rows,
-  ) {
+    StreamController streamController,
+  ) async {
     List<String> row = rows[0];
     // the last coordinate before the right-hand border
     int rightmostIndex = row.length - 2;
@@ -78,6 +80,16 @@ class Alien {
     // resetFrame(board);
     // resetFrame();
     while (count < iterations) {
+      streamController.stream.listen((event) {
+        final player = Player();
+        var playerRow = board[Board.playerRow];
+        // print('event ${event.toString()}');
+        print('event: $event');
+        final key = KeyTypes.fromValue(event);
+        print('key = $key');
+        final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+        print('newPlayerrow: ${newPlayerrow.join(' ')}');
+      });
       if (row[rightmostIndex] == Board.alien) {
         // once the aliens reach lastSpot, go left until they reach the firstSpot
         // while the aliens haven't yet reached the leftmost coordinate before the border
@@ -89,7 +101,21 @@ class Alien {
           shiftAliensLeft(rows[1]);
 
           // resetFrame(board);
-          resetFrame(board);
+          
+          
+          // streamController.stream.listen((event) {
+          //   final player = Player();
+          //   var playerRow = board[Board.playerRow];
+          //   // print('event ${event.toString()}');
+          //   print('event: $event');
+          //   final key = KeyTypes.fromValue(event);
+          //   print('key = $key');
+          //   final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+          //   print('newPlayerrow: ${newPlayerrow.join(' ')}');
+          // });
+          //delay until stream input is processed
+          await Future.delayed(Duration(milliseconds: 100));
+          resetFrame(board, streamController);
         }
       } else {
         //shift right if the aliens are as far left as possible
@@ -97,8 +123,8 @@ class Alien {
         shiftAliensRight(rows[1]);
 
         // resetFrame(board);
-
-        resetFrame(board);
+        await Future.delayed(Duration(milliseconds: 100));
+        resetFrame(board, streamController);
       }
       // if the first available coordinate is an alien, then the aliens have made one
       // full shift to the left. Add that to the count.
@@ -111,7 +137,6 @@ class Alien {
     
     // stdout.flush() didn't seem to work here
     
-    return board;
   }
 
   void printBoard(board) {
@@ -121,9 +146,23 @@ class Alien {
   }
 
   // void resetFrame(board) {
-  void resetFrame(board) {
+  void resetFrame(board, StreamController inputController) async {
+    // inputController.stream.listen((event) {
+    //   final player = Player();
+    //   var playerRow = board[Board.playerRow];
+    //   // print('event ${event.toString()}');
+    //   // print('event: $event');
+    //   final key = KeyTypes.fromValue(event);
+    //   // print('key = $key');
+    //   final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+    //   // print('newPlayerrow: ${newPlayerrow.join(' ')}');
+    // });
+    
+      
     final alien = Alien();
     // final console = Console();
+    // delay to make sure stream input is processed
+    // await Future.delayed(Duration(milliseconds: 100));
     // print the board
     alien.printBoard(board);
     // pause the program before clearing the screen.
@@ -131,7 +170,9 @@ class Alien {
     sleep(Duration(seconds: 1));
     // Uses ANSI codes to erase the terminal display and reset the cursor.
     // console.clearScreen();
+    //ANSI clear screen and reset cursor
     print('\x1B[2J\x1B[H');
     // stdinStreamSubscription.resume();
+    
   }
 }
