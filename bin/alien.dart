@@ -176,7 +176,7 @@ class Alien {
     // Uses ANSI codes to erase the terminal display and reset the cursor.
     // console.clearScreen();
     //ANSI clear screen and reset cursor
-    print('\x1B[2J\x1B[H');
+    // print('\x1B[2J\x1B[H');
     // stdinStreamSubscription.resume();
     
   }

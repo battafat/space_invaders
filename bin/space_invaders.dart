@@ -32,12 +32,36 @@ void main() async {
   stdin.echoMode = false;
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
   //TODO: look up in dart_complete_reference how to use the stream controller
+  KeyTypes key;
   stdinStreamSubscription = stdin.listen((event) {
-
+    if (event.length >= 3 && event[1] == 91) { 
+          switch (event[2]) {
+            // up arrow pressed
+            case 65:
+              event = [65];
+              break;
+            // down arrow pressed
+            case 66:
+              event = [66];
+              break;
+              // right arrow pressed
+            case 67:
+              event = [67];
+              break;
+              // left arrow pressed
+            case 68:
+              event = [68];
+              break;
+            default:
+              print("Unknown escape sequence: $event");
+          }
+    }
     // print('event $event');
     final key = KeyTypes.fromValue(event);
+    print(event);
+    
     handleKeyEvent(key, playerRow!, player);
-    // print('key = $key');
+    // print('key = ${key.toString()}');
     // print(playerRow.join(' '));
     streamController.add(event); // Send the update signal
   });

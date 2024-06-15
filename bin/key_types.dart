@@ -7,18 +7,22 @@ import 'board.dart';
 import 'player.dart';
 import 'user_input.dart';
 enum KeyTypes {
-  up([101]), // e
-  down([100]), // d
-  left([115]), // s
-  right([102]), // f
+  e([101]), // e
+  d([100]), // d
+  s([115]), // s
+  f([102]), // f
   backspace([32]),
   unknown([]),
+  right([67]),
+  left([68]),
+  up([65]),
+  down([66]),
   ;
 
   final List<int> codes;
   const KeyTypes(this.codes);
 
-  static KeyTypes fromValue(List<int> value) {
+  static dynamic fromValue(List<int> value) {
     final eq = ListEquality();
     return values.firstWhere(
       (e) => eq.equals(e.codes, value),
