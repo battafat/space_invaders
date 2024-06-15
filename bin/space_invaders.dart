@@ -18,6 +18,7 @@ void main() async {
   final player = Player();
   stdout.flush();
   
+
   Map<String, List<String>> board = controlBoard.board;
   var playerRow = board[Board.playerRow];
   List<List<String>> alienRows = [
@@ -26,14 +27,14 @@ void main() async {
   ];
   // attempted (incomplete) solution to
   // input user keystrokes without pressing enter:
-  // stdin.lineMode = false;
-  List<int> buffer = []; // Buffer to accumulate key press bytes
+  stdin.lineMode = false;
   // StreamController<Map<String, List<String>>> streamController = StreamController<Map<String, List<String>>>();
-  
+  stdin.echoMode = false;
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
   //TODO: look up in dart_complete_reference how to use the stream controller
   stdinStreamSubscription = stdin.listen((event) {
-    // print('event ${event.toString()}');
+
+    // print('event $event');
     final key = KeyTypes.fromValue(event);
     handleKeyEvent(key, playerRow!, player);
     // print('key = $key');
@@ -43,7 +44,8 @@ void main() async {
   
   alien.aliensTraverseXaxis(board, 2, alienRows, streamController);
   // stdinStreamSubscription.cancel();
-
+  
+ 
   // makes sure the buffer is flushed so that terminal
   // doesn't print previous game's output
   stdout.flush();
