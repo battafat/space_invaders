@@ -71,7 +71,7 @@ class Alien {
     Map<String, List<String>> board,
     int iterations,
     List<List<String>> rows,
-    StreamController streamController,
+    StreamController<List<int>> streamController,
   ) async {
     List<String> row = rows[0];
     // the last coordinate before the right-hand border
@@ -80,60 +80,65 @@ class Alien {
     // resetFrame(board);
     // resetFrame();
     while (count < iterations) {
-      streamController.stream.listen((event) {
-        final player = Player();
-        var playerRow = board[Board.playerRow];
-        // print('event ${event.toString()}');
-        print('event: $event');
-        final key = KeyTypes.fromValue(event);
-        print('key = $key');
-        final newPlayerrow = handleKeyEvent(key, playerRow!, player);
-        print('newPlayerrow: ${newPlayerrow.join(' ')}');
-      });
-      if (row[rightmostIndex] == Board.alien) {
-        // once the aliens reach lastSpot, go left until they reach the firstSpot
-        // while the aliens haven't yet reached the leftmost coordinate before the border
-        while (row[1] != Board.alien) {
-          // shift left if the leftmost coordinate isn't an alien
-          // for (var i = 0; i < rows.length; i++){
-          //   shiftAliensLeft(rows[i]);}
-          shiftAliensLeft(row);
-          shiftAliensLeft(rows[1]);
+      // streamController.stream.listen((event) async{
+      //     final player = Player();
+      //     var playerRow = board[Board.playerRow];
+      //     // print('event ${event.toString()}');
+      //     // print('event: $event');
+      //     final key = KeyTypes.fromValue(event);
+      //     // print('key = $key');
+      //     final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+        if (row[rightmostIndex] == Board.alien) {
+          // once the aliens reach lastSpot, go left until they reach the firstSpot
+          // while the aliens haven't yet reached the leftmost coordinate before the border
+          while (row[1] != Board.alien) {
+            // shift left if the leftmost coordinate isn't an alien
+            // for (var i = 0; i < rows.length; i++){
+            //   shiftAliensLeft(rows[i]);}
+            shiftAliensLeft(row);
+            shiftAliensLeft(rows[1]);
+
+            StreamSubscription<List<int>> subscriberLeft = streamController.stream.listen((event) {
+              final player = Player();
+              var playerRow = board[Board.playerRow];
+              final key = KeyTypes.fromValue(event);
+              handleKeyEvent(key, playerRow!, player);
+            });
+            subscriberLeft.cancel();
+            
+            
+            //delay until stream input is processed
+            await Future.delayed(Duration(milliseconds: 100));
+            resetFrame(board, streamController);
+          }
+        } else {
+          //shift right if the aliens are as far left as possible
+          shiftAliensRight(row);
+          shiftAliensRight(rows[1]);
 
           // resetFrame(board);
-          
-          
           // streamController.stream.listen((event) {
           //   final player = Player();
           //   var playerRow = board[Board.playerRow];
           //   // print('event ${event.toString()}');
-          //   print('event: $event');
+          //   // print('event: $event');
           //   final key = KeyTypes.fromValue(event);
-          //   print('key = $key');
+          //   // print('key = $key');
           //   final newPlayerrow = handleKeyEvent(key, playerRow!, player);
-          //   print('newPlayerrow: ${newPlayerrow.join(' ')}');
+          //   // print('newPlayerrow: ${newPlayerrow.join(' ')}');
           // });
-          //delay until stream input is processed
           await Future.delayed(Duration(milliseconds: 100));
           resetFrame(board, streamController);
+          
         }
-      } else {
-        //shift right if the aliens are as far left as possible
-        shiftAliensRight(row);
-        shiftAliensRight(rows[1]);
-
-        // resetFrame(board);
-        await Future.delayed(Duration(milliseconds: 100));
-        resetFrame(board, streamController);
+        // if the first available coordinate is an alien, then the aliens have made one
+        // full shift to the left. Add that to the count.
+        if (row[1] == Board.alien) {
+          count += 1;
+        }
       }
-      // if the first available coordinate is an alien, then the aliens have made one
-      // full shift to the left. Add that to the count.
-      if (row[1] == Board.alien) {
-        count += 1;
-      }
-    }
-    // reset the terminal
-    print('\x1Bc');
+      // reset the terminal
+      print('\x1Bc');
     
     // stdout.flush() didn't seem to work here
     

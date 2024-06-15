@@ -34,8 +34,8 @@ void main() async {
   //TODO: look up in dart_complete_reference how to use the stream controller
   stdinStreamSubscription = stdin.listen((event) {
     // print('event ${event.toString()}');
-    // final key = KeyTypes.fromValue(event);
-    // handleKeyEvent(key, playerRow!, player);
+    final key = KeyTypes.fromValue(event);
+    handleKeyEvent(key, playerRow!, player);
     // print('key = $key');
     // print(playerRow.join(' '));
     streamController.add(event); // Send the update signal
