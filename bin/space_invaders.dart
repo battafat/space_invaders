@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:dart_console/dart_console.dart';
 import 'alien.dart';
 import 'board.dart';
@@ -10,23 +11,52 @@ import 'player.dart';
 import 'user_input.dart';
 
 late final StreamSubscription<List<int>> stdinStreamSubscription;
-
+const rows = 10;
+const columns = 5;
+const right = 1;
+const left = -1;
+var direction = right;
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
+  var changeDirection = false;
   var controlBoard = Board();
   final alien = Alien();
   final player = Player();
+  var alienPositions = [Point(0,1), Point(0,2), Point(0,3)];
+  var playerPosition = Point(rows - 1, (columns ~/ 2));
+  
   stdout.flush();
+  print(playerPosition);
   
 
   Map<String, List<String>> board = controlBoard.board;
   var playerRow = board[Board.playerRow];
-  List<List<String>> alienRows = [
-    board[Board.alienRow1]!,
-    board[Board.alienRow2]!
-  ];
-  // attempted (incomplete) solution to
-  // input user keystrokes without pressing enter:
+
+  for (var row = 0; row < rows; row++){
+    for (var column = 0; column < columns; column++){
+      if (alienPositions.contains(Point(row,column))){
+        stdout.write(Board.alien);
+        if (column == columns - 1){
+          changeDirection = true; 
+        }
+      }
+      else if (playerPosition == Point(row, column)){
+        stdout.write(Board.player);
+      }
+      else {
+        stdout.write(Board.space);
+      }
+    }
+      stdout.writeln();
+  }
+  if (changeDirection == true){
+    if (direction == right){
+      direction = left;
+    }
+    if (direction == left){
+      direction = right;
+    }
+  }
   stdin.lineMode = false;
   // StreamController<Map<String, List<String>>> streamController = StreamController<Map<String, List<String>>>();
   stdin.echoMode = false;
@@ -58,16 +88,13 @@ void main() async {
     }
     // print('event $event');
     final key = KeyTypes.fromValue(event);
-    print(event);
     
     handleKeyEvent(key, playerRow!, player);
-    // print('key = ${key.toString()}');
-    // print(playerRow.join(' '));
+
     streamController.add(event); // Send the update signal
   });
   
-  alien.aliensTraverseXaxis(board, 2, alienRows, streamController);
-  // stdinStreamSubscription.cancel();
+
   
  
   // makes sure the buffer is flushed so that terminal

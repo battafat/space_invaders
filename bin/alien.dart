@@ -15,6 +15,8 @@ class Alien {
   // the previous index.
   List<String> shiftAliensRight(List<String> row) {
     int rightmostIndex = row.length - 2;
+    // if aliens have reached the rightmostIndex,
+    // they can't go any farther right. So return the same row.
     if (row[rightmostIndex] == Board.alien) {
       // TODO: include error or throw. return row, but show an error, but not to user?
       return row;
@@ -176,7 +178,7 @@ class Alien {
     // Uses ANSI codes to erase the terminal display and reset the cursor.
     // console.clearScreen();
     //ANSI clear screen and reset cursor
-    // print('\x1B[2J\x1B[H');
+    print('\x1B[2J\x1B[H');
     // stdinStreamSubscription.resume();
     
   }
