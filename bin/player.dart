@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'board.dart';
 import 'key_types.dart';
+import 'space_invaders.dart';
 
 class Player {
 
@@ -19,33 +20,25 @@ class Player {
     final updatedPosition = Point(playerPosition.x, playerPosition.y - 1);
     return updatedPosition;
   }
-
   
-  List<String> checkMove(List<String> playerRow, KeyTypes move){
+  Point<int> checkMove(KeyTypes move, Point<int> playerPosition){
+    // if the playerPosition is all the way at the left
+    // then they can't move left
+    if (playerPosition.x == 0 && move == left){
+      return playerPosition;
+    }
+    // if the playerPosition is all the way at the right
+    // then they can't move right
+    if (playerPosition.x == columns - 1 && move == right){
+      return playerPosition;
+    }
+
     if (move == right){
-      return moveRight(playerRow);
+      return moveRight(playerPosition);
     }
     if (move == left){
-      return moveLeft(playerRow);
+      return moveLeft(playerPosition);
     }
-    return playerRow;
+    return playerPosition;
   }
-  
-
-
-  
-// https://api.flutter.dev/flutter/services/LogicalKeyboardKey-class.html
-
-  // String playerMove (playerRow){
-  //   var move = stdin.readLineSync();    
-  //   // var move = stdin.asBroadcastStream(onListen: Future.value);
-  //   // print(line?.trim() == 'f' ? 'moved right!' : 'Nope :(');
-  //   // result = player. ('f ? player.moveRight(row) : 'Nope :(');
-  //   return move!;
-
-  // }
 }
-  // final controlBoard = Board();
-  //   final playerRow = controlBoard.board[Board.playerRow];
-  
-// }
