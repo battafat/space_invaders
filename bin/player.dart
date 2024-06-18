@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'board.dart';
 import 'key_types.dart';
 
@@ -9,55 +10,17 @@ class Player {
   KeyTypes left = KeyTypes.left;
   KeyTypes right = KeyTypes.right;
 
-
-  List<String> moveRight(List<String> row){
-    
-    int rightmostIndex = row.length - 2;
-    String rightmostSpot = row[rightmostIndex];
-    if (rightmostSpot == Board.player){
-      return row;
-    }
-    for (int i = row.length - 2; i >= 1; i--) {
-      // when loop reaches leftmost coordinate,
-      // it should be a space, not the border string
-
-      if (i == 1) {
-        row[i] = Board.space;
-        continue;
-      }
-      if (i == rightmostIndex){
-        if (row[i] == Board.player){
-          break;
-        }
-      }
-      if (row[i] == Board.border) {
-        continue;
-      } 
-      else {
-        row[i] = row[i - 1];
-      }
-    }
-    return row;
+  Point<int> moveRight(Point<int> playerPosition){
+    final updatedPosition = Point(playerPosition.x, playerPosition.y + 1);
+    return updatedPosition;
   }
-  List<String> moveLeft(List<String> row) {
-      final leftmostIndex = 1;
-      if (row[leftmostIndex] == Board.player) {
-        // TODO: include error or throw. return row, but show an error.
-        return row;
-      }
-      for (int i = 0; i < row.length; i++) {
-        if (i == row.length - 2) {
-          row[i] = Board.space;
-          continue;
-        }
-        if (row[i] == Board.border) {
-          continue;
-        } else {
-          row[i] = row[i + 1];
-        }
-      }
-      return row;
-    }
+
+  Point<int> moveLeft(Point<int> playerPosition){
+    final updatedPosition = Point(playerPosition.x, playerPosition.y - 1);
+    return updatedPosition;
+  }
+
+  
   List<String> checkMove(List<String> playerRow, KeyTypes move){
     if (move == right){
       return moveRight(playerRow);

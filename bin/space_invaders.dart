@@ -64,6 +64,7 @@ void main() async {
   //TODO: look up in dart_complete_reference how to use the stream controller
   KeyTypes key;
   stdinStreamSubscription = stdin.listen((event) {
+    
     if (event.length >= 3 && event[1] == 91) { 
           switch (event[2]) {
             // up arrow pressed
