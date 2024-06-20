@@ -9,9 +9,9 @@ void playInvaders(board) {
   for (var i = 0; i < 3; i++) {
     // var direction = Directions();
     // makeBoard(rows, cols);
-    // direction.checkMove();
+    // direction.handlePlayerMove();
     final screen = Board();
-    screen.displayBoard(board);
+    screen.displayBoard();
     // print(screen.board["alien"]);
     String message = 'Frame number: $counter';
     print(message);

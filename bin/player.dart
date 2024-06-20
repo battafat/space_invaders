@@ -21,15 +21,15 @@ class Player {
     return updatedPosition;
   }
   
-  Point<int> checkMove(KeyTypes move, Point<int> playerPosition){
+  Point<int> handlePlayerMove(KeyTypes move, Point<int> playerPosition){
     // if the playerPosition is all the way at the left
     // then they can't move left
-    if (playerPosition.x == 0 && move == left){
+    if (playerPosition.y == 0 && move == left){
       return playerPosition;
     }
     // if the playerPosition is all the way at the right
     // then they can't move right
-    if (playerPosition.x == columns - 1 && move == right){
+    if (playerPosition.y == columns - 1 && move == right){
       return playerPosition;
     }
 

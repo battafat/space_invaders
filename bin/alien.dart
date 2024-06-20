@@ -89,7 +89,7 @@ class Alien {
       //     // print('event: $event');
       //     final key = KeyTypes.fromValue(event);
       //     // print('key = $key');
-      //     final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+      //     final newPlayerrow = handlePlayerMove(key, playerRow!, player);
         if (row[rightmostIndex] == Board.alien) {
           // once the aliens reach lastSpot, go left until they reach the firstSpot
           // while the aliens haven't yet reached the leftmost coordinate before the border
@@ -104,7 +104,7 @@ class Alien {
               final player = Player();
               var playerRow = board[Board.playerRow];
               final key = KeyTypes.fromValue(event);
-              handleKeyEvent(key, playerRow!, player);
+              player.handlePlayerMove(key, playerPosition);
             });
             subscriberLeft.cancel();
             
@@ -126,7 +126,7 @@ class Alien {
           //   // print('event: $event');
           //   final key = KeyTypes.fromValue(event);
           //   // print('key = $key');
-          //   final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+          //   final newPlayerrow = handlePlayerMove(key, playerRow!, player);
           //   // print('newPlayerrow: ${newPlayerrow.join(' ')}');
           // });
           await Future.delayed(Duration(milliseconds: 100));
@@ -161,7 +161,7 @@ class Alien {
     //   // print('event: $event');
     //   final key = KeyTypes.fromValue(event);
     //   // print('key = $key');
-    //   final newPlayerrow = handleKeyEvent(key, playerRow!, player);
+    //   final newPlayerrow = handlePlayerMove(key, playerRow!, player);
     //   // print('newPlayerrow: ${newPlayerrow.join(' ')}');
     // });
     
