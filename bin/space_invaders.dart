@@ -15,14 +15,26 @@ const rows = 10;
 const columns = 15;
 const right = 1;
 const left = -1;
-var direction = right;
 var playerPosition = Point(rows - 1, (columns ~/ 2));
+Future<List<Point<int>>> compileAlienPositions(int rows, int columns) async{
+  List<Point<int>> alienPositions = [];
+  for (var h = 0; h < 2; h++) {
+    for (var i = (columns ~/ 3); i < 2 * (columns ~/ 3); i++) {
+      alienPositions.add(Point(h, i));
+    }
+  }
+  return alienPositions;
+}
 void main() async {
+var direction = right;
   // TODO: add reset command at beginning to make sure terminal is clear
   var changeDirection = false;
   final player = Player();
-  final alienCount = columns ~/ 3;
-  var alienPositions = [Point(0,1), Point(0,2), Point(0,3)];
+  
+  // List<Point<int>> alienPositions = [];
+  var alienPositions = await compileAlienPositions(rows, columns);
+  print('alienPositions: $alienPositions');
+  // var alienPositions = [Point(0,1), Point(0,2), Point(0,3)];
   
   stdout.flush();
    
@@ -72,8 +84,13 @@ void main() async {
       for (var column = 0; column < columns; column++){
         if (alienPositions.contains(Point(row,column))){
           stdout.write(Board.alien);
+          // check if aliens reached the rightmost index.
           if (column == columns - 1){
             changeDirection = true; 
+          }
+          // check if aliens reached the leftmost index.
+          if (column == 0){
+            changeDirection = true;
           }
         }
         else if (playerPosition == Point(row, column)){
@@ -87,15 +104,23 @@ void main() async {
         stdout.writeln();
     }
     Future.delayed(Duration(seconds: 1));
+    print('91 changeDirection: $changeDirection');
     if (changeDirection == true){
       if (direction == right){
         direction = left;
+        print('96 did it get here? Left: $left. Direction: $direction');
       }
-      if (direction == left){
+      else {
         direction = right;
       }
+      changeDirection = false;
     }
-    });
+    print('99 direction: $direction');
+    // TODO: fix glitch where screen prints no aliens
+    for (var i = 0; i < alienPositions.length; i++){
+      alienPositions[i] = Point(alienPositions[i].x, alienPositions[i].y + direction);
+    }
+  });
 
   // makes sure the buffer is flushed so that terminal
   // doesn't print previous game's output
