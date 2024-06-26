@@ -33,8 +33,6 @@ var direction = right;
   
   // List<Point<int>> alienPositions = [];
   var alienPositions = await compileAlienPositions(rows, columns);
-  print('alienPositions: $alienPositions');
-  // var alienPositions = [Point(0,1), Point(0,2), Point(0,3)];
   
   stdout.flush();
    
@@ -42,8 +40,6 @@ var direction = right;
   // StreamController<Map<String, List<String>>> streamController = StreamController<Map<String, List<String>>>();
   stdin.echoMode = false;
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
-  // StreamSubscription<List<int>> subscriber1;
-  StreamSubscription<List<int>> subscriber1;
   
   stdinStreamSubscription = stdin.listen((event) {
     // TODO: add if statment for escape code: 27(?)
@@ -70,15 +66,13 @@ var direction = right;
               print("Unknown escape sequence: $event");
           }
       }
-      // streamController.add(event); // Send the update signal
-      // print('event $event');
       final KeyTypes key = KeyTypes.fromValue(event);
       playerPosition = player.handlePlayerMove(key, playerPosition);
-      print('64 $key');
       streamController.add(event);
     });
-  Timer.periodic(Duration(seconds: 1), (Timer timer) async {
-
+    
+  Timer.periodic(Duration(seconds: 1, milliseconds: 500), (Timer timer) async {
+    
     await Future.delayed(Duration(milliseconds: 100));
     for (var row = 0; row < rows; row++){
       for (var column = 0; column < columns; column++){
@@ -103,19 +97,20 @@ var direction = right;
       }
         stdout.writeln();
     }
-    Future.delayed(Duration(seconds: 1));
-    print('91 changeDirection: $changeDirection');
+
+    sleep(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 2));
+    // clear the screen after displaying the board
+    print('\x1B[2J\x1B[H');
     if (changeDirection == true){
       if (direction == right){
         direction = left;
-        print('96 did it get here? Left: $left. Direction: $direction');
       }
       else {
         direction = right;
       }
       changeDirection = false;
     }
-    print('99 direction: $direction');
     // TODO: fix glitch where screen prints no aliens
     for (var i = 0; i < alienPositions.length; i++){
       alienPositions[i] = Point(alienPositions[i].x, alienPositions[i].y + direction);
