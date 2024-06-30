@@ -26,7 +26,7 @@ Future<List<Point<int>>> compileAlienPositions(int rows, int columns) async{
   return alienPositions;
 }
 void main() async {
-var direction = right;
+  var direction = right;
   // TODO: add reset command at beginning to make sure terminal is clear
   var changeDirection = false;
   final player = Player();
@@ -70,14 +70,16 @@ var direction = right;
       playerPosition = player.handlePlayerMove(key, playerPosition);
       streamController.add(event);
     });
-    
-  Timer.periodic(Duration(seconds: 1, milliseconds: 500), (Timer timer) async {
-    
+
+  Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
+    late List<List<String>> board = List.generate((rows), (_) => List.filled(columns, ' '));
     await Future.delayed(Duration(milliseconds: 100));
+    print('\x1B[2J\x1B[H');
     for (var row = 0; row < rows; row++){
       for (var column = 0; column < columns; column++){
         if (alienPositions.contains(Point(row,column))){
-          stdout.write(Board.alien);
+          // stdout.write(Board.alien);
+          board[row][column] = Board.alien;
           // check if aliens reached the rightmost index.
           if (column == columns - 1){
             changeDirection = true; 
@@ -88,20 +90,26 @@ var direction = right;
           }
         }
         else if (playerPosition == Point(row, column)){
-          stdout.write(Board.player);
+          // stdout.write(Board.player);
+          board[row][column] = Board.player;
         }
         else {
           // stdout.write(Board.space);
-          stdout.write('_');
+          // stdout.write(' ');
+          board[row][column] = Board.space;
         }
       }
-        stdout.writeln();
+        // stdout.writeln();
     }
-
-    sleep(Duration(seconds: 1));
+    for (var x = 0; x < board.length; x++){
+      print(board[x].join());
+    }
+    //this sleep is keeps the board visible long
+    // enough to see
+    sleep(Duration(milliseconds: 500));
     // await Future.delayed(Duration(seconds: 2));
     // clear the screen after displaying the board
-    print('\x1B[2J\x1B[H');
+    // print('\x1B[2J\x1B[H');
     if (changeDirection == true){
       if (direction == right){
         direction = left;
