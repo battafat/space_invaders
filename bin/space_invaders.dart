@@ -31,13 +31,11 @@ void main() async {
   var changeDirection = false;
   final player = Player();
   
-  // List<Point<int>> alienPositions = [];
   var alienPositions = await compileAlienPositions(rows, columns);
   
   stdout.flush();
    
   stdin.lineMode = false;
-  // StreamController<Map<String, List<String>>> streamController = StreamController<Map<String, List<String>>>();
   stdin.echoMode = false;
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
   
@@ -74,11 +72,12 @@ void main() async {
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
     late List<List<String>> board = List.generate((rows), (_) => List.filled(columns, ' '));
     await Future.delayed(Duration(milliseconds: 100));
+    // clear the screen after displaying the board
     print('\x1B[2J\x1B[H');
+    
     for (var row = 0; row < rows; row++){
       for (var column = 0; column < columns; column++){
         if (alienPositions.contains(Point(row,column))){
-          // stdout.write(Board.alien);
           board[row][column] = Board.alien;
           // check if aliens reached the rightmost index.
           if (column == columns - 1){
@@ -90,26 +89,21 @@ void main() async {
           }
         }
         else if (playerPosition == Point(row, column)){
-          // stdout.write(Board.player);
           board[row][column] = Board.player;
         }
         else {
-          // stdout.write(Board.space);
-          // stdout.write(' ');
           board[row][column] = Board.space;
         }
       }
-        // stdout.writeln();
     }
+    // display the board after each update
     for (var x = 0; x < board.length; x++){
       print(board[x].join());
     }
-    //this sleep is keeps the board visible long
-    // enough to see
+    //sleep keeps the board visible long
+    // enough to see between updates
     sleep(Duration(milliseconds: 500));
     // await Future.delayed(Duration(seconds: 2));
-    // clear the screen after displaying the board
-    // print('\x1B[2J\x1B[H');
     if (changeDirection == true){
       if (direction == right){
         direction = left;
@@ -119,7 +113,7 @@ void main() async {
       }
       changeDirection = false;
     }
-    // TODO: fix glitch where screen prints no aliens
+  
     for (var i = 0; i < alienPositions.length; i++){
       alienPositions[i] = Point(alienPositions[i].x, alienPositions[i].y + direction);
     }
