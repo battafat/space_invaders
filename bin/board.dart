@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Board {
   static const space = ' ';
   static const alien = '@';
@@ -20,7 +22,30 @@ class Board {
     }
     return direction;
   }
-
+  
+  bool updateBoardState(List<Point<int>> alienPositions,
+      List<List<String>> boardState, bool changeDirection, Point<int> playerPosition) {
+    for (var row = 0; row < Board.rows; row++) {
+      for (var column = 0; column < Board.columns; column++) {
+        if (alienPositions.contains(Point(row, column))) {
+          boardState[row][column] = Board.alien;
+          // check if aliens reached the rightmost index.
+          if (column == Board.columns - 1) {
+            changeDirection = true;
+          }
+          // check if aliens reached the leftmost index.
+          if (column == 0) {
+            changeDirection = true;
+          }
+        } else if (playerPosition == Point(row, column)) {
+          boardState[row][column] = Board.player;
+        } else {
+          boardState[row][column] = Board.space;
+        }
+      }
+    }
+    return changeDirection;
+  }
 }
 
 

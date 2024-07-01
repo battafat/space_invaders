@@ -16,28 +16,7 @@ var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 
 
 
-bool updateboardState(List<Point<int>> alienPositions, List<List<String>> boardState, bool changeDirection){
-  for (var row = 0; row < Board.rows; row++) {
-    for (var column = 0; column < Board.columns; column++) {
-      if (alienPositions.contains(Point(row, column))) {
-        boardState[row][column] = Board.alien;
-        // check if aliens reached the rightmost index.
-        if (column == Board.columns - 1) {
-          changeDirection = true;
-        }
-        // check if aliens reached the leftmost index.
-        if (column == 0) {
-          changeDirection = true;
-        }
-      } else if (playerPosition == Point(row, column)) {
-        boardState[row][column] = Board.player;
-      } else {
-        boardState[row][column] = Board.space;
-      }
-    }
-  }
-  return changeDirection;
-}
+
 
 void printboardState(List<List<String>> boardState){
   for (var x = 0; x < boardState.length; x++) {
@@ -79,7 +58,7 @@ void main() async {
     // TODO: possibly write tests for clearScreen function?
     board.clearScreen();
     // TODO: write tests for the updateboardState
-    changeDirection = updateboardState(alienPositions, boardState, changeDirection);
+    changeDirection = board.updateBoardState(alienPositions, boardState, changeDirection, playerPosition);
     // display the boardState after each update
     // TODO: write a test for this function?
     printboardState(boardState);
