@@ -84,6 +84,22 @@ void clearScreen(){
   print('\x1B[2J\x1B[H');
 }
 
+List<Point<int>> updateAlienPositions(List<Point<int>> alienPositions, int direction){
+  for (var i = 0; i < alienPositions.length; i++) {
+    alienPositions[i] =
+        Point(alienPositions[i].x, alienPositions[i].y + direction);
+  }
+  return alienPositions;
+}
+int validateDirection(int direction){
+      if (direction == right){
+        direction = left;
+      }
+      else {
+        direction = right;
+      }
+return direction;
+}
 void main() async {
   var direction = right;
   // TODO: add reset command at beginning to make sure terminal is clear
@@ -123,23 +139,18 @@ void main() async {
     // await Future.delayed(Duration(seconds: 2));
     // TODO: refactor this if statement into updateDirection?
     // TODO: if refactored into function, write tests
-    if (changeDirection == true){
-      if (direction == right){
-        direction = left;
-      }
-      else {
-        direction = right;
-      }
+    if (changeDirection == true) {
+      direction = validateDirection(direction);
       changeDirection = false;
     }
     // TODO: refactor into function updateAlienPositions
     // TODO: write tests for function
-    for (var i = 0; i < alienPositions.length; i++){
-      alienPositions[i] = Point(alienPositions[i].x, alienPositions[i].y + direction);
-    }
+    updateAlienPositions(alienPositions, direction);
+    
   });
 
   // makes sure the buffer is flushed so that terminal
   // doesn't print previous game's output
+  //TODO: add some kind of reset? that or endGame function
   stdout.flush();
 }
