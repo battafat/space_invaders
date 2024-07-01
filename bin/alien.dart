@@ -9,8 +9,6 @@ import "key_types.dart";
 import "user_input.dart";
 
 class Alien {
-  
-
   Future<List<Point<int>>> initializeAlienPositions(
       int rows, int columns) async {
     List<Point<int>> alienPositions = [];
@@ -22,4 +20,12 @@ class Alien {
     return alienPositions;
   }
 
+  List<Point<int>> updateAlienPositions(
+      List<Point<int>> alienPositions, int direction) {
+    for (var i = 0; i < alienPositions.length; i++) {
+      alienPositions[i] =
+          Point(alienPositions[i].x, alienPositions[i].y + direction);
+    }
+    return alienPositions;
+  }
 }

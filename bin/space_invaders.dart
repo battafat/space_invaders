@@ -14,31 +14,7 @@ late final StreamSubscription<List<int>> stdinStreamSubscription;
 
 var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 
-List<int> processUserInput(List<int> event){
-  if (event.length >= 3 && event[1] == 91) {
-    switch (event[2]) {
-      // up arrow pressed
-      case 65:
-        event = [65];
-        break;
-      // down arrow pressed
-      case 66:
-        event = [66];
-        break;
-      // right arrow pressed
-      case 67:
-        event = [67];
-        break;
-      // left arrow pressed
-      case 68:
-        event = [68];
-        break;
-      default:
-        print("Unknown escape sequence: $event");
-    }
-  }
-  return event;
-}
+
 
 bool updateboardState(List<Point<int>> alienPositions, List<List<String>> boardState, bool changeDirection){
   for (var row = 0; row < Board.rows; row++) {
@@ -69,13 +45,7 @@ void printboardState(List<List<String>> boardState){
   }
 }
 
-List<Point<int>> updateAlienPositions(List<Point<int>> alienPositions, int direction){
-  for (var i = 0; i < alienPositions.length; i++) {
-    alienPositions[i] =
-        Point(alienPositions[i].x, alienPositions[i].y + direction);
-  }
-  return alienPositions;
-}
+
 
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
@@ -84,6 +54,7 @@ void main() async {
   final player = Player();
   final board = Board();
   final alien = Alien();
+  final userInput = UserInput();
 
   // initialize list of alien positions
   var alienPositions = await alien.initializeAlienPositions(Board.rows, Board.columns);
@@ -95,7 +66,7 @@ void main() async {
   
   stdinStreamSubscription = stdin.listen((event) {
     // TODO: write tests for processUserInput
-    event = processUserInput(event);
+    event = userInput.processUserInput(event);
     final KeyTypes key = KeyTypes.fromValue(event);
     playerPosition = player.handlePlayerMove(key, playerPosition);
     streamController.add(event);
@@ -121,7 +92,7 @@ void main() async {
       changeDirection = false;
     }
     // TODO: write tests for function
-    updateAlienPositions(alienPositions, direction);
+    alien.updateAlienPositions(alienPositions, direction);
     
   });
 
