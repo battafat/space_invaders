@@ -29,7 +29,7 @@ class Player {
     }
     // if the playerPosition is all the way at the right
     // then they can't move right
-    if (playerPosition.y == columns - 1 && move == right){
+    if (playerPosition.y == Board.columns - 1 && move == right){
       return playerPosition;
     }
 

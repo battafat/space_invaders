@@ -6,17 +6,13 @@ import 'dart:math';
 import 'package:dart_console/dart_console.dart';
 import 'alien.dart';
 import 'board.dart';
-import 'boardState.dart';
 import 'key_types.dart';
 import 'player.dart';
 import 'user_input.dart';
 
 late final StreamSubscription<List<int>> stdinStreamSubscription;
-const rows = 10;
-const columns = 15;
-const right = 1;
-const left = -1;
-var playerPosition = Point(rows - 1, (columns ~/ 2));
+
+var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 Future<List<Point<int>>> initializeAlienPositions(int rows, int columns) async{
   List<Point<int>> alienPositions = [];
   for (var h = 0; h < 2; h++) {
@@ -53,12 +49,12 @@ List<int> processUserInput(List<int> event){
 }
 
 bool updateboardState(List<Point<int>> alienPositions, List<List<String>> boardState, bool changeDirection){
-  for (var row = 0; row < rows; row++) {
-    for (var column = 0; column < columns; column++) {
+  for (var row = 0; row < Board.rows; row++) {
+    for (var column = 0; column < Board.columns; column++) {
       if (alienPositions.contains(Point(row, column))) {
-        boardState[row][column] = boardState.alien;
+        boardState[row][column] = Board.alien;
         // check if aliens reached the rightmost index.
-        if (column == columns - 1) {
+        if (column == Board.columns - 1) {
           changeDirection = true;
         }
         // check if aliens reached the leftmost index.
@@ -66,9 +62,9 @@ bool updateboardState(List<Point<int>> alienPositions, List<List<String>> boardS
           changeDirection = true;
         }
       } else if (playerPosition == Point(row, column)) {
-        boardState[row][column] = boardState.player;
+        boardState[row][column] = Board.player;
       } else {
-        boardState[row][column] = boardState.space;
+        boardState[row][column] = Board.space;
       }
     }
   }
@@ -88,24 +84,16 @@ List<Point<int>> updateAlienPositions(List<Point<int>> alienPositions, int direc
   }
   return alienPositions;
 }
-int validateDirection(int direction){
-      if (direction == right){
-        direction = left;
-      }
-      else {
-        direction = right;
-      }
-return direction;
-}
+
 void main() async {
-  var direction = right;
+  var direction = Board.right;
   // TODO: add reset command at beginning to make sure terminal is clear
   var changeDirection = false;
   final player = Player();
   final board = Board();
 
   // initialize list of alien positions
-  var alienPositions = await initializeAlienPositions(rows, columns);
+  var alienPositions = await initializeAlienPositions(Board.rows, Board.columns);
   stdout.flush();
    
   stdin.lineMode = false;
@@ -121,7 +109,7 @@ void main() async {
   });
 
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
-    late List<List<String>> boardState = List.generate((rows), (_) => List.filled(columns, ' '));
+    late List<List<String>> boardState = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
     await Future.delayed(Duration(milliseconds: 100));
     // clear the screen after displaying the boardState
     // TODO: possibly write tests for clearScreen function?
@@ -136,7 +124,7 @@ void main() async {
     sleep(Duration(milliseconds: 500));
     // TODO: if refactored into function, write tests
     if (changeDirection == true) {
-      direction = validateDirection(direction);
+      direction = board.validateDirection(direction);
       changeDirection = false;
     }
     // TODO: write tests for function
