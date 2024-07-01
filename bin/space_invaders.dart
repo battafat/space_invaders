@@ -74,6 +74,12 @@ bool updateBoard(List<Point<int>> alienPositions, List<List<String>> board, bool
   return changeDirection;
 }
 
+void printBoard(List<List<String>> board){
+  for (var x = 0; x < board.length; x++) {
+    print(board[x].join());
+  }
+}
+
 void main() async {
   var direction = right;
   // TODO: add reset command at beginning to make sure terminal is clear
@@ -103,15 +109,11 @@ void main() async {
     // TODO: refactor into clearScreen function
     // TODO: possibly write tests for clearScreen function?
     print('\x1B[2J\x1B[H');
-    // TODO: refactor this loop into function updateBoard
     // TODO: write tests for the function
     changeDirection = updateBoard(alienPositions, board, changeDirection);
     // display the board after each update
-    // TODO: refactor this into displayScreen function
     // TODO: write a test for this function?
-    for (var x = 0; x < board.length; x++){
-      print(board[x].join());
-    }
+    printBoard(board);
     //sleep keeps the board visible long
     // enough to see between updates
     sleep(Duration(milliseconds: 500));
