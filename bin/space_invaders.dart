@@ -14,18 +14,6 @@ late final StreamSubscription<List<int>> stdinStreamSubscription;
 
 var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 
-
-
-
-
-void printboardState(List<List<String>> boardState){
-  for (var x = 0; x < boardState.length; x++) {
-    print(boardState[x].join());
-  }
-}
-
-
-
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   var direction = Board.right;
@@ -61,7 +49,7 @@ void main() async {
     changeDirection = board.updateBoardState(alienPositions, boardState, changeDirection, playerPosition);
     // display the boardState after each update
     // TODO: write a test for this function?
-    printboardState(boardState);
+    board.printboardState(boardState);
     //sleep keeps the boardState visible long
     // enough to see between updates
     sleep(Duration(milliseconds: 500));

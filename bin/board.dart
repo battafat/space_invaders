@@ -22,7 +22,7 @@ class Board {
     }
     return direction;
   }
-  
+
   bool updateBoardState(List<Point<int>> alienPositions,
       List<List<String>> boardState, bool changeDirection, Point<int> playerPosition) {
     for (var row = 0; row < Board.rows; row++) {
@@ -45,6 +45,12 @@ class Board {
       }
     }
     return changeDirection;
+  }
+  
+  void printboardState(List<List<String>> boardState) {
+    for (var x = 0; x < boardState.length; x++) {
+      print(boardState[x].join());
+    }
   }
 }
 
