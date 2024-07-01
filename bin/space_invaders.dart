@@ -16,7 +16,7 @@ const columns = 15;
 const right = 1;
 const left = -1;
 var playerPosition = Point(rows - 1, (columns ~/ 2));
-Future<List<Point<int>>> compileAlienPositions(int rows, int columns) async{
+Future<List<Point<int>>> initializeAlienPositions(int rows, int columns) async{
   List<Point<int>> alienPositions = [];
   for (var h = 0; h < 2; h++) {
     for (var i = (columns ~/ 3); i < 2 * (columns ~/ 3); i++) {
@@ -51,13 +51,36 @@ List<int> processUserInput(List<int> event){
   return event;
 }
 
+bool updateBoard(List<Point<int>> alienPositions, List<List<String>> board, bool changeDirection){
+  for (var row = 0; row < rows; row++) {
+    for (var column = 0; column < columns; column++) {
+      if (alienPositions.contains(Point(row, column))) {
+        board[row][column] = Board.alien;
+        // check if aliens reached the rightmost index.
+        if (column == columns - 1) {
+          changeDirection = true;
+        }
+        // check if aliens reached the leftmost index.
+        if (column == 0) {
+          changeDirection = true;
+        }
+      } else if (playerPosition == Point(row, column)) {
+        board[row][column] = Board.player;
+      } else {
+        board[row][column] = Board.space;
+      }
+    }
+  }
+  return changeDirection;
+}
+
 void main() async {
   var direction = right;
   // TODO: add reset command at beginning to make sure terminal is clear
   var changeDirection = false;
   final player = Player();
-  
-  var alienPositions = await compileAlienPositions(rows, columns);
+  // initialize list of alien positions
+  var alienPositions = await initializeAlienPositions(rows, columns);
   
   stdout.flush();
    
@@ -66,7 +89,7 @@ void main() async {
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
   
   stdinStreamSubscription = stdin.listen((event) {
-    // TODO: write tests for this function
+    // TODO: write tests for processUserInput
     event = processUserInput(event);
     final KeyTypes key = KeyTypes.fromValue(event);
     playerPosition = player.handlePlayerMove(key, playerPosition);
@@ -82,27 +105,7 @@ void main() async {
     print('\x1B[2J\x1B[H');
     // TODO: refactor this loop into function updateBoard
     // TODO: write tests for the function
-    for (var row = 0; row < rows; row++){
-      for (var column = 0; column < columns; column++){
-        if (alienPositions.contains(Point(row,column))){
-          board[row][column] = Board.alien;
-          // check if aliens reached the rightmost index.
-          if (column == columns - 1){
-            changeDirection = true; 
-          }
-          // check if aliens reached the leftmost index.
-          if (column == 0){
-            changeDirection = true;
-          }
-        }
-        else if (playerPosition == Point(row, column)){
-          board[row][column] = Board.player;
-        }
-        else {
-          board[row][column] = Board.space;
-        }
-      }
-    }
+    changeDirection = updateBoard(alienPositions, board, changeDirection);
     // display the board after each update
     // TODO: refactor this into displayScreen function
     // TODO: write a test for this function?
