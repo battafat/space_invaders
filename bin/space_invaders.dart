@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:dart_console/dart_console.dart';
 import 'alien.dart';
 import 'board.dart';
+import 'boardState.dart';
 import 'key_types.dart';
 import 'player.dart';
 import 'user_input.dart';
@@ -51,11 +52,11 @@ List<int> processUserInput(List<int> event){
   return event;
 }
 
-bool updateBoard(List<Point<int>> alienPositions, List<List<String>> board, bool changeDirection){
+bool updateboardState(List<Point<int>> alienPositions, List<List<String>> boardState, bool changeDirection){
   for (var row = 0; row < rows; row++) {
     for (var column = 0; column < columns; column++) {
       if (alienPositions.contains(Point(row, column))) {
-        board[row][column] = Board.alien;
+        boardState[row][column] = boardState.alien;
         // check if aliens reached the rightmost index.
         if (column == columns - 1) {
           changeDirection = true;
@@ -65,23 +66,19 @@ bool updateBoard(List<Point<int>> alienPositions, List<List<String>> board, bool
           changeDirection = true;
         }
       } else if (playerPosition == Point(row, column)) {
-        board[row][column] = Board.player;
+        boardState[row][column] = boardState.player;
       } else {
-        board[row][column] = Board.space;
+        boardState[row][column] = boardState.space;
       }
     }
   }
   return changeDirection;
 }
 
-void printBoard(List<List<String>> board){
-  for (var x = 0; x < board.length; x++) {
-    print(board[x].join());
+void printboardState(List<List<String>> boardState){
+  for (var x = 0; x < boardState.length; x++) {
+    print(boardState[x].join());
   }
-}
-
-void clearScreen(){
-  print('\x1B[2J\x1B[H');
 }
 
 List<Point<int>> updateAlienPositions(List<Point<int>> alienPositions, int direction){
@@ -105,6 +102,8 @@ void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   var changeDirection = false;
   final player = Player();
+  final board = Board();
+
   // initialize list of alien positions
   var alienPositions = await initializeAlienPositions(rows, columns);
   stdout.flush();
@@ -122,17 +121,17 @@ void main() async {
   });
 
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
-    late List<List<String>> board = List.generate((rows), (_) => List.filled(columns, ' '));
+    late List<List<String>> boardState = List.generate((rows), (_) => List.filled(columns, ' '));
     await Future.delayed(Duration(milliseconds: 100));
-    // clear the screen after displaying the board
+    // clear the screen after displaying the boardState
     // TODO: possibly write tests for clearScreen function?
-    clearScreen();
-    // TODO: write tests for the updateBoard
-    changeDirection = updateBoard(alienPositions, board, changeDirection);
-    // display the board after each update
+    board.clearScreen();
+    // TODO: write tests for the updateboardState
+    changeDirection = updateboardState(alienPositions, boardState, changeDirection);
+    // display the boardState after each update
     // TODO: write a test for this function?
-    printBoard(board);
-    //sleep keeps the board visible long
+    printboardState(boardState);
+    //sleep keeps the boardState visible long
     // enough to see between updates
     sleep(Duration(milliseconds: 500));
     // TODO: if refactored into function, write tests

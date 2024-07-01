@@ -33,26 +33,26 @@ enum KeyTypes {
 
 class KeystrokeStream {
   late StreamController<Map<String, List<String>>> _controller;
-  KeystrokeStream(){
-    _controller = StreamController<Map<String, List<String>>>(
-        onListen: _startStream,
-        onResume: _startStream,
-        onPause: _pauseStdin,
-        // onCancel: _stopTimer
-        );
-  }
+  // KeystrokeStream(){
+  //   _controller = StreamController<Map<String, List<String>>>(
+  //       onListen: _startStream,
+  //       onResume: _startStream,
+  //       onPause: _pauseStdin,
+  //       // onCancel: _stopTimer
+  //       );
+  // }
    
-  void _startStream(){
-    final board = Board().board;
-    final playerRow = board[Board.playerRow];
-    // stdin.listen((keyValues) {
+  // void _startStream(){
+  //   final board = Board().board;
+  //   final playerRow = board[Board.playerRow];
+  //   // stdin.listen((keyValues) {
 
-    // });
-  }
+  //   // });
+  // }
 
-  void _pauseStdin(){
+  // void _pauseStdin(){
     
-  }
+  // }
 
   Stream<Map<String, List<String>>> get stream => _controller.stream;
 }
