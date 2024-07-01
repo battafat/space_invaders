@@ -13,15 +13,7 @@ import 'user_input.dart';
 late final StreamSubscription<List<int>> stdinStreamSubscription;
 
 var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
-Future<List<Point<int>>> initializeAlienPositions(int rows, int columns) async{
-  List<Point<int>> alienPositions = [];
-  for (var h = 0; h < 2; h++) {
-    for (var i = (columns ~/ 3); i < 2 * (columns ~/ 3); i++) {
-      alienPositions.add(Point(h, i));
-    }
-  }
-  return alienPositions;
-}
+
 List<int> processUserInput(List<int> event){
   if (event.length >= 3 && event[1] == 91) {
     switch (event[2]) {
@@ -86,14 +78,15 @@ List<Point<int>> updateAlienPositions(List<Point<int>> alienPositions, int direc
 }
 
 void main() async {
-  var direction = Board.right;
   // TODO: add reset command at beginning to make sure terminal is clear
+  var direction = Board.right;
   var changeDirection = false;
   final player = Player();
   final board = Board();
+  final alien = Alien();
 
   // initialize list of alien positions
-  var alienPositions = await initializeAlienPositions(Board.rows, Board.columns);
+  var alienPositions = await alien.initializeAlienPositions(Board.rows, Board.columns);
   stdout.flush();
    
   stdin.lineMode = false;
