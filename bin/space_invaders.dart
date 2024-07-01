@@ -107,7 +107,6 @@ void main() async {
   final player = Player();
   // initialize list of alien positions
   var alienPositions = await initializeAlienPositions(rows, columns);
-  
   stdout.flush();
    
   stdin.lineMode = false;
@@ -128,7 +127,7 @@ void main() async {
     // clear the screen after displaying the board
     // TODO: possibly write tests for clearScreen function?
     clearScreen();
-    // TODO: write tests for the function
+    // TODO: write tests for the updateBoard
     changeDirection = updateBoard(alienPositions, board, changeDirection);
     // display the board after each update
     // TODO: write a test for this function?
@@ -136,14 +135,11 @@ void main() async {
     //sleep keeps the board visible long
     // enough to see between updates
     sleep(Duration(milliseconds: 500));
-    // await Future.delayed(Duration(seconds: 2));
-    // TODO: refactor this if statement into updateDirection?
     // TODO: if refactored into function, write tests
     if (changeDirection == true) {
       direction = validateDirection(direction);
       changeDirection = false;
     }
-    // TODO: refactor into function updateAlienPositions
     // TODO: write tests for function
     updateAlienPositions(alienPositions, direction);
     
