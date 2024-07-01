@@ -80,6 +80,10 @@ void printBoard(List<List<String>> board){
   }
 }
 
+void clearScreen(){
+  print('\x1B[2J\x1B[H');
+}
+
 void main() async {
   var direction = right;
   // TODO: add reset command at beginning to make sure terminal is clear
@@ -106,9 +110,8 @@ void main() async {
     late List<List<String>> board = List.generate((rows), (_) => List.filled(columns, ' '));
     await Future.delayed(Duration(milliseconds: 100));
     // clear the screen after displaying the board
-    // TODO: refactor into clearScreen function
     // TODO: possibly write tests for clearScreen function?
-    print('\x1B[2J\x1B[H');
+    clearScreen();
     // TODO: write tests for the function
     changeDirection = updateBoard(alienPositions, board, changeDirection);
     // display the board after each update
