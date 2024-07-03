@@ -17,9 +17,9 @@ var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   var direction = Board.right;
-  var changeDirection = false;
   final player = Player();
-  final board = Board();
+  final controlBoard = Board();
+  
   final alien = Alien();
   final userInput = UserInput();
 
@@ -39,26 +39,31 @@ void main() async {
     streamController.add(event);
   });
 
+  
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
-    List<List<String>> boardState = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
+    // List<List<String>> boardState = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
+    var boardState = controlBoard.board;
     await Future.delayed(Duration(milliseconds: 100));
     // clear the screen after displaying the boardState
     // TODO: possibly write tests for clearScreen function?
-    board.clearScreen();
+    controlBoard.clearScreen();
+    print('changeDirection: $controlBoard.changeDirection');
     // TODO: write tests for the updateboardState
-    Map<String, dynamic> update = board.updateBoardState(alienPositions, boardState, changeDirection, playerPosition);
-    changeDirection = update['changeDirection'];
-    boardState = update['boardState'];
+    controlBoard.updateBoardState(alienPositions, boardState, playerPosition);
+    print('updated changeDirection: $controlBoard.changeDirection');
+    // Map<String, dynamic> update = board.updateBoardState(alienPositions, boardState, changeDirection, playerPosition);
+    // changeDirection = update['changeDirection'];
+    // boardState = update['boardState'];
     // display the boardState after each update
     // TODO: write a test for this function?
-    board.printBoardState(boardState);
+    controlBoard.printBoardState(boardState);
     //sleep keeps the boardState visible long
     // enough to see between updates
     sleep(Duration(milliseconds: 500));
-    if (changeDirection == true) {
+    if (controlBoard.changeDirection == true) {
     // TODO: if refactored into function, write tests
-      direction = board.reverseDirection(direction);
-      changeDirection = false;
+      direction = controlBoard.reverseDirection(direction);
+      controlBoard.changeDirection = false;
     }
     // TODO: write tests for function
     alien.updateAlienPositions(alienPositions, direction);

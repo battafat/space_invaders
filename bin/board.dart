@@ -9,6 +9,8 @@ class Board {
   static const columns = 15;
   static const right = 1;
   static const left = -1;
+  bool changeDirection = false;
+  List<List<String>> board = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
   
   void clearScreen() {
       print('\x1B[2J\x1B[H');
@@ -23,14 +25,14 @@ class Board {
     return direction;
   }
 
-  Map<String, Object> updateBoardState(List<Point<int>> alienPositions,
-      List<List<String>> boardState, bool changeDirection, Point<int> playerPosition) {
+  void updateBoardState(List<Point<int>> alienPositions,
+      List<List<String>> boardState, Point<int> playerPosition) {
     for (var row = 0; row < Board.rows; row++) {
       for (var column = 0; column < Board.columns; column++) {
         if (alienPositions.contains(Point(row, column))) {
           boardState[row][column] = Board.alien;
           // check if aliens reached either the rightmost or leftmost index.
-          changeDirection = isChangeDirection(column, changeDirection);
+          changeDirection = isChangeDirection(column);
         } else if (playerPosition == Point(row, column)) {
           boardState[row][column] = Board.player;
         } else {
@@ -39,10 +41,10 @@ class Board {
       }
     }
 
-    return {'changeDirection': changeDirection, 'boardState': boardState};
+    
   }
 
-  bool isChangeDirection(int column, bool changeDirection){
+  bool isChangeDirection(int column){
     if (column == Board.columns - 1) {
       return changeDirection = true;
     }
