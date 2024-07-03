@@ -41,24 +41,17 @@ void main() async {
 
   
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
-    // List<List<String>> boardState = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
     var boardState = controlBoard.board;
     await Future.delayed(Duration(milliseconds: 100));
     // clear the screen after displaying the boardState
     // TODO: possibly write tests for clearScreen function?
     controlBoard.clearScreen();
-    print('changeDirection: $controlBoard.changeDirection');
     // TODO: write tests for the updateboardState
     controlBoard.updateBoardState(alienPositions, boardState, playerPosition);
-    print('updated changeDirection: $controlBoard.changeDirection');
-    // Map<String, dynamic> update = board.updateBoardState(alienPositions, boardState, changeDirection, playerPosition);
-    // changeDirection = update['changeDirection'];
-    // boardState = update['boardState'];
     // display the boardState after each update
     // TODO: write a test for this function?
     controlBoard.printBoardState(boardState);
-    //sleep keeps the boardState visible long
-    // enough to see between updates
+    // sleep keeps the boardState visible long enough to see between updates
     sleep(Duration(milliseconds: 500));
     if (controlBoard.changeDirection == true) {
     // TODO: if refactored into function, write tests
