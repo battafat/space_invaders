@@ -10,7 +10,7 @@ class Board {
   static const right = 1;
   static const left = -1;
   bool changeDirection = false;
-  List<List<String>> board = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
+  List<List<String>> boardState = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
   
   void clearScreen() {
       print('\x1B[2J\x1B[H');
@@ -26,7 +26,7 @@ class Board {
   }
 
   void updateBoardState(List<Point<int>> alienPositions,
-      List<List<String>> boardState, Point<int> playerPosition) {
+      Point<int> playerPosition) {
     for (var row = 0; row < Board.rows; row++) {
       for (var column = 0; column < Board.columns; column++) {
         if (alienPositions.contains(Point(row, column))) {
@@ -40,8 +40,6 @@ class Board {
         }
       }
     }
-
-    
   }
 
   bool isChangeDirection(int column){
@@ -55,7 +53,7 @@ class Board {
     return changeDirection;
   }
   
-  void printBoardState(List<List<String>> boardState) {
+  void printBoardState() {
     for (var x = 0; x < boardState.length; x++) {
       print(boardState[x].join());
     }

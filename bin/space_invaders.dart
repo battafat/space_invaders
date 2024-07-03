@@ -41,16 +41,15 @@ void main() async {
 
   
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
-    var boardState = controlBoard.board;
     await Future.delayed(Duration(milliseconds: 100));
     // clear the screen after displaying the boardState
     // TODO: possibly write tests for clearScreen function?
     controlBoard.clearScreen();
     // TODO: write tests for the updateboardState
-    controlBoard.updateBoardState(alienPositions, boardState, playerPosition);
+    controlBoard.updateBoardState(alienPositions, playerPosition);
     // display the boardState after each update
     // TODO: write a test for this function?
-    controlBoard.printBoardState(boardState);
+    controlBoard.printBoardState();
     // sleep keeps the boardState visible long enough to see between updates
     sleep(Duration(milliseconds: 500));
     if (controlBoard.changeDirection == true) {
