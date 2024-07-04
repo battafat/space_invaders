@@ -11,18 +11,18 @@ class Board {
   static const left = -1;
   bool changeDirection = false;
   List<List<String>> boardState = List.generate((Board.rows), (_) => List.filled(Board.columns, ' '));
-  
+  int direction = right;
+
   void clearScreen() {
       print('\x1B[2J\x1B[H');
   }
 
-  int reverseDirection(int direction) {
+  void reverseDirection() {
     if (direction == right) {
       direction = left;
     } else {
       direction = right;
     }
-    return direction;
   }
 
   void updateBoardState(List<Point<int>> alienPositions,
