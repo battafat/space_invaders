@@ -16,7 +16,6 @@ var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
-  var direction = Board.right;
   final player = Player();
   final controlBoard = Board();
   
@@ -31,9 +30,9 @@ void main() async {
   stdin.echoMode = false;
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
   
-  stdinStreamSubscription = stdin.listen((event) {
+  stdinStreamSubscription = stdin.listen((keyPress) {
     // TODO: write tests for processUserInput
-    event = userInput.processUserInput(event);
+    final event = userInput.processUserInput(keyPress);
     final KeyTypes key = KeyTypes.fromValue(event);
     playerPosition = player.handlePlayerMove(key, playerPosition);
     streamController.add(event);
@@ -54,11 +53,12 @@ void main() async {
     sleep(Duration(milliseconds: 500));
     if (controlBoard.changeDirection == true) {
     // TODO: if refactored into function, write tests
-      direction = controlBoard.reverseDirection(direction);
+      controlBoard.reverseDirection();
+      //reset changeDirection
       controlBoard.changeDirection = false;
     }
     // TODO: write tests for function
-    alien.updateAlienPositions(alienPositions, direction);
+    alien.updateAlienPositions(alienPositions, controlBoard.direction);
     
   });
 
