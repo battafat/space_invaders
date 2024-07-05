@@ -10,15 +10,14 @@ class Player {
 
   KeyTypes left = KeyTypes.left;
   KeyTypes right = KeyTypes.right;
+  var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 
-  Point<int> moveRight(Point<int> playerPosition){
+  void moveRight(){
     final updatedPosition = Point(playerPosition.x, playerPosition.y + 1);
-    return updatedPosition;
   }
 
-  Point<int> moveLeft(Point<int> playerPosition){
+  void moveLeft(){
     final updatedPosition = Point(playerPosition.x, playerPosition.y - 1);
-    return updatedPosition;
   }
   
   Point<int> handlePlayerMove(KeyTypes move, Point<int> playerPosition){

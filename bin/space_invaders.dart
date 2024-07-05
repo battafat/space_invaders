@@ -12,20 +12,19 @@ import 'user_input.dart';
 
 late final StreamSubscription<List<int>> stdinStreamSubscription;
 
-var playerPosition = Point(Board.rows - 1, (Board.columns ~/ 2));
 
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   final player = Player();
   final controlBoard = Board();
-  
   final alien = Alien();
   final userInput = UserInput();
 
   // initialize list of alien positions
+  // TODO: refactor the line below into alien.dart?
   var alienPositions = await alien.initializeAlienPositions(Board.rows, Board.columns);
   stdout.flush();
-   
+  // TODO: write startUserInput()
   stdin.lineMode = false;
   stdin.echoMode = false;
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
@@ -38,7 +37,7 @@ void main() async {
     streamController.add(event);
   });
 
-  
+  // TODO: Make this it's own gameLoop() ?
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
     await Future.delayed(Duration(milliseconds: 100));
     // clear the screen after displaying the boardState
