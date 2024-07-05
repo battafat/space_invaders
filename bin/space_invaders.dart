@@ -33,7 +33,7 @@ void main() async {
     // TODO: write tests for processUserInput
     final event = userInput.processUserInput(keyPress);
     final KeyTypes key = KeyTypes.fromValue(event);
-    playerPosition = player.handlePlayerMove(key, playerPosition);
+    player.handlePlayerMove(key);
     streamController.add(event);
   });
 
@@ -44,7 +44,7 @@ void main() async {
     // TODO: possibly write tests for clearScreen function?
     controlBoard.clearScreen();
     // TODO: write tests for the updateboardState
-    controlBoard.updateBoardState(alienPositions, playerPosition);
+    controlBoard.updateBoardState(alienPositions, player.playerPosition);
     // display the boardState after each update
     // TODO: write a test for this function?
     controlBoard.printBoardState();
