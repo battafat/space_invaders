@@ -1,4 +1,6 @@
 import "dart:async";
+import "dart:core";
+
 import "dart:math";
 import "player.dart";
 import "space_invaders.dart";
@@ -9,12 +11,13 @@ import "key_types.dart";
 import "user_input.dart";
 
 class Alien {
-  Future<List<Point<int>>> initializeAlienPositions(
-      int rows, int columns) async {
+
+  Future<List<Point<int>>> initializeAlienPositions() async {
     List<Point<int>> alienPositions = [];
-    for (var h = 0; h < 2; h++) {
-      for (var i = (columns ~/ 3); i < 2 * (columns ~/ 3); i++) {
-        alienPositions.add(Point(h, i));
+    // TODO: look up if there's a generic for grid variable names
+    for (var alienRow = 0; alienRow < 2; alienRow++) {
+      for (var alienColumn = (Board.columns ~/ 3); alienColumn < 2 * (Board.columns ~/ 3); alienColumn++) {
+        alienPositions.add(Point(alienRow, alienColumn));
       }
     }
     return alienPositions;

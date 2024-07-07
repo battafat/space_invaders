@@ -22,7 +22,7 @@ void main() async {
 
   // initialize list of alien positions
   // TODO: refactor the line below into alien.dart?
-  var alienPositions = await alien.initializeAlienPositions(Board.rows, Board.columns);
+  var alienPositions = await alien.initializeAlienPositions();
   stdout.flush();
   // TODO: write startUserInput()
   stdin.lineMode = false;
