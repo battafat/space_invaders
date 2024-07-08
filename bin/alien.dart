@@ -11,7 +11,7 @@ import "key_types.dart";
 import "user_input.dart";
 
 class Alien {
-
+// TODO: write tests for initializeAlienPositions
   Future<List<Point<int>>> initializeAlienPositions() async {
     List<Point<int>> alienPositions = [];
     // TODO: look up if there's a generic for grid variable names
@@ -22,7 +22,7 @@ class Alien {
     }
     return alienPositions;
   }
-
+// TODO: write tests for updateAlienPositions
   List<Point<int>> updateAlienPositions(
       List<Point<int>> alienPositions, int direction) {
     for (var i = 0; i < alienPositions.length; i++) {

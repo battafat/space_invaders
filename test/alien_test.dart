@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -5,80 +7,46 @@ import '../bin/alien.dart';
 import '../bin/board.dart';
 
 void main (){
-  // alien tests start at row[0] and end at row[row.length - 1] because:
-  // the border '|' occupies row[0] and row[row.length-1].
-  // So leftmost possible alien coordinate is row[1].
-  // And rightmost possible alien coordinate is row[row.len - 2].
-  group('alienShiftRight tests', (){
-    test('shiftAliensRight called when already rightmost aligned', (){
+  group('updateAlienPositions tests', (){
+    test('updateAlienPositions right', () {
       final alien = Alien();
-      final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
-      const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
-      expect(alien.shiftAliensRight(alienRow1), updatedRow);
-    });
-    test('shiftAliensRight, aliens start row[1]', () {
-      final alien = Alien();
-      final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
-      const updatedRow = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
-      expect(alien.shiftAliensRight(alienRow1), updatedRow);
-    });
-    test('aliensShiftRight, aliens start row[2]', () {
-      final alien = Alien();
-      final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
-      const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
-      expect(alien.shiftAliensRight(alienRow1), updatedRow);
-    });
-    test('shiftAliensRight, aliens start row[3]', () {
-      final alien = Alien();
-      final boardClass = Board();
-      final board = boardClass.board;
-      final alienRow1 = board[Board.alienRow1];
-      const updatedRow = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
-      expect(alien.shiftAliensRight(alienRow1!), updatedRow);
+      final List<Point<int>> alienPositions = [
+        Point(0, 1),
+        Point(0, 2),
+        Point(0, 3),
+        Point(0, 4),
+        Point(0, 5)
+      ];
+      final updatedRow = [
+        Point(0, 2),
+        Point(0, 3),
+        Point(0, 4),
+        Point(0, 5),
+        Point(0, 6)
+      ];
+      expect(
+          alien.updateAlienPositions(alienPositions, Board.right), updatedRow);
     });
 
-    test('shiftAliensRight, aliens start row[4]', (){
+    test('updateAlienPositions left', () {
       final alien = Alien();
-      final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
-      const updatedRow = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
-      expect(alien.shiftAliensRight(alienRow1), updatedRow);
-    });
-
-  });
-
-  group('shiftAliensLeft tests', (){
-    test('shiftAliensLeft called when rightmost aligned', () {
-      final alien = Alien();
-      final alienRow1 = ['|', ' ', ' ', ' ', ' ', '@', '@', '@', '|'];
-      const updatedRow = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
-      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
-    });
-    test('shiftAliensLeft aliens start row[4]', () {
-      final alien = Alien();
-      final alienRow1 = ['|', ' ', ' ', ' ', '@', '@', '@', ' ', '|'];
-      const updatedRow = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
-      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
-    });
-    test('shiftAliensLeft aliens start row[3]', () {
-      final alien = Alien();
-      final alienRow1 = ['|', ' ', ' ', '@', '@', '@', ' ', ' ', '|'];
-      const updatedRow = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
-      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
-    });
-    test('shiftAliensLeft, aliens start row[2]', () {
-      final alien = Alien();
-      final alienRow1 = ['|', ' ', '@', '@', '@', ' ', ' ', ' ', '|'];
-      const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
-      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
-    });
-    test('shiftAliensLeft, aliens start row[1], leftmost aligned', () {
-      final alien = Alien();
-      final alienRow1 = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
-      const updatedRow = ['|', '@', '@', '@', ' ', ' ', ' ', ' ', '|'];
-      expect(alien.shiftAliensLeft(alienRow1), updatedRow);
+      final alienPositions = [
+        Point(0, 2),
+        Point(0, 3),
+        Point(0, 4),
+        Point(0, 5),
+        Point(0, 6)
+      ];
+      final List<Point<int>> updatedRow = [
+        Point(0, 1),
+        Point(0, 2),
+        Point(0, 3),
+        Point(0, 4),
+        Point(0, 5)
+      ];
+      expect(
+          alien.updateAlienPositions(alienPositions, Board.left), updatedRow);
     });
   });
-
-  
 }
 

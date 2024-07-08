@@ -23,6 +23,7 @@ enum KeyTypes {
   const KeyTypes(this.codes);
 
   static dynamic fromValue(List<int> value) {
+  // TODO: refactor if necessary for readability
     final eq = ListEquality();
     return values.firstWhere(
       (e) => eq.equals(e.codes, value),
