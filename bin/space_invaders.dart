@@ -22,7 +22,7 @@ void main() async {
 
   // initialize list of alien positions
   // TODO: refactor the line below into alien.dart?
-  var alienPositions = await alien.initializeAlienPositions();
+  // var alienPositions = alien.initializeAlienPositions();
   stdout.flush();
   // TODO: write startUserInput()
   stdin.lineMode = false;
@@ -44,7 +44,7 @@ void main() async {
     // TODO: possibly write tests for clearScreen function?
     controlBoard.clearScreen();
     // TODO: write tests for the updateboardState
-    controlBoard.updateBoardState(alienPositions, player.playerPosition);
+    controlBoard.updateBoardState(alien.alienPositions, player.playerPosition);
     // display the boardState after each update
     // TODO: write a test for this function?
     controlBoard.printBoardState();
@@ -57,7 +57,7 @@ void main() async {
       controlBoard.changeDirection = false;
     }
     // TODO: write tests for function
-    alien.updateAlienPositions(alienPositions, controlBoard.direction);
+    alien.updateAlienPositions(alien.alienPositions, controlBoard.direction);
     
   });
 
