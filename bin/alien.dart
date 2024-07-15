@@ -10,20 +10,28 @@ import "board.dart";
 import "key_types.dart";
 import "user_input.dart";
 
-class Alien {
-  List<Point<int>> alienPositions;
-  // initializer list
-  Alien() : alienPositions = initializeAlienPositions();
+class ConfigWrapper {
+  int get staticColumns => Board.columns;
+}
 
+
+class Alien {
+  final ConfigWrapper configWrapper;
+  final List<Point<int>> alienPositions;
+  
+  Alien() : configWrapper = ConfigWrapper(),
+            alienPositions = [] {
+            alienPositions.addAll(initializeAlienPositions());
+            }
 // TODO: write tests for initializeAlienPositions
-  static List<Point<int>> initializeAlienPositions(){
-    List<Point<int>> alienPositions = [];
+  List<Point<int>> initializeAlienPositions(){
+    List<Point<int>> positions = [];
     for (var alienRow = 0; alienRow < 2; alienRow++) {
-      for (var alienColumn = (Board.columns ~/ 3); alienColumn < 2 * (Board.columns ~/ 3); alienColumn++) {
-        alienPositions.add(Point(alienRow, alienColumn));
+      for (var alienColumn = (configWrapper.staticColumns ~/ 3); alienColumn < 2 * (configWrapper.staticColumns ~/ 3); alienColumn++) {
+        positions.add(Point(alienRow, alienColumn));
       }
     }
-    return alienPositions;
+    return positions;
   }
 
   List<Point<int>> updateAlienPositions(

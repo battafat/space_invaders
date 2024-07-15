@@ -6,6 +6,15 @@ import 'package:test/scaffolding.dart';
 import '../bin/alien.dart';
 import '../bin/board.dart';
 
+class MockConfigWrapper extends ConfigWrapper {
+  final int _mockValue;
+
+  MockConfigWrapper(this._mockValue);
+
+  @override
+  int get staticValue => _mockValue;
+}
+
 void main (){
   group('updateAlienPositions tests', (){
     test('updateAlienPositions right', () {
@@ -48,5 +57,25 @@ void main (){
           alien.updateAlienPositions(alienPositions, Board.left), updatedRow);
     });
   });
-}
 
+  group('initializeAlienPositions tests', (){
+    test('initializeAlienPositions odd', () {
+      final alien = Alien();
+      Board.columns = 15;
+      final initializedRows = [
+        Point(0, 5),
+        Point(0, 6),
+        Point(0, 7),
+        Point(0, 8),
+        Point(0, 9),
+        Point(1, 5),
+        Point(1, 6),
+        Point(1, 7),
+        Point(1, 8),
+        Point(1, 9),
+        ];
+      expect(
+          Alien(), initializedRows);
+    });
+  });
+}

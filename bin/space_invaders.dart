@@ -36,7 +36,7 @@ void main() async {
     player.handlePlayerMove(key);
     streamController.add(event);
   });
-
+  
   // TODO: Make this it's own gameLoop() ?
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
     await Future.delayed(Duration(milliseconds: 100));
