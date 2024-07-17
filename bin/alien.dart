@@ -19,12 +19,13 @@ class Alien {
   final ConfigWrapper configWrapper;
   final List<Point<int>> alienPositions;
   
-  Alien() : configWrapper = ConfigWrapper(),
-            alienPositions = [] {
-            alienPositions.addAll(initializeAlienPositions());
-            }
+  Alien({ConfigWrapper? config})
+      : configWrapper = config ?? ConfigWrapper(),
+        alienPositions = [] {
+        alienPositions.addAll(_initializeAlienPositions());
+  }
 // TODO: write tests for initializeAlienPositions
-  List<Point<int>> initializeAlienPositions(){
+  List<Point<int>> _initializeAlienPositions(){
     List<Point<int>> positions = [];
     for (var alienRow = 0; alienRow < 2; alienRow++) {
       for (var alienColumn = (configWrapper.staticColumns ~/ 3); alienColumn < 2 * (configWrapper.staticColumns ~/ 3); alienColumn++) {

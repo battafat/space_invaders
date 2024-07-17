@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-
 import '../bin/alien.dart';
 import '../bin/board.dart';
 
@@ -60,8 +58,12 @@ void main (){
 
   group('initializeAlienPositions tests', (){
     test('initializeAlienPositions odd', () {
-      final alien = Alien();
-      Board.columns = 15;
+      // Arrange
+      final mockConfig = MockConfigWrapper(33);
+      final alien = Alien(config: mockConfig);
+
+      final positions = alien.alienPositions;
+      // var positions = Alien().initializeAlienPositions();
       final initializedRows = [
         Point(0, 5),
         Point(0, 6),
@@ -75,7 +77,7 @@ void main (){
         Point(1, 9),
         ];
       expect(
-          Alien(), initializedRows);
+          positions, initializedRows);
     });
   });
 }
