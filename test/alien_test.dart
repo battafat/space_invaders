@@ -11,7 +11,7 @@ class MockConfigWrapper extends ConfigWrapper {
 
   @override
   int get staticColumns => _mockValue;
-  //TODO: write a test to make sure MockConfigWrapper assigns correctly
+  //TODO: write a test to make sure MockConfigWrapper assigns correctly and overrides ConfigWrapper
   @override
   String toString() {
     return 'ConfigWrapper(staticColumns: $staticColumns)';

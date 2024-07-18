@@ -28,7 +28,6 @@ class Alien {
         alienPositions = [] {
         alienPositions.addAll(_initializeAlienPositions());
   }
-// TODO: write tests for initializeAlienPositions
   List<Point<int>> _initializeAlienPositions(){
     List<Point<int>> positions = [];
     for (var alienRow = 0; alienRow < 2; alienRow++) {

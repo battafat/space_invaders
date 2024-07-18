@@ -32,6 +32,7 @@ class Board {
         if (alienPositions.contains(Point(row, column))) {
           boardState[row][column] = Board.alien;
           // check if aliens reached either the rightmost or leftmost index.
+          // TODO: write test for isChangeDirection
           changeDirection = isChangeDirection(column);
         } else if (playerPosition == Point(row, column)) {
           boardState[row][column] = Board.player;

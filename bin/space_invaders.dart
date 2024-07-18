@@ -20,13 +20,11 @@ void main() async {
   final alien = Alien();
   final userInput = UserInput();
 
-  // initialize list of alien positions
-  // TODO: refactor the line below into alien.dart?
-  // var alienPositions = alien.initializeAlienPositions();
   stdout.flush();
   // TODO: write startUserInput()
   stdin.lineMode = false;
   stdin.echoMode = false;
+  //TODO: check whether streamController is even necessary now that I don't have multiple listeners
   StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
   
   stdinStreamSubscription = stdin.listen((keyPress) {
