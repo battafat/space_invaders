@@ -10,7 +10,12 @@ class MockConfigWrapper extends ConfigWrapper {
   MockConfigWrapper(this._mockValue);
 
   @override
-  int get staticValue => _mockValue;
+  int get staticColumns => _mockValue;
+  //TODO: write a test to make sure MockConfigWrapper assigns correctly
+  @override
+  String toString() {
+    return 'ConfigWrapper(staticColumns: $staticColumns)';
+  }
 }
 
 void main (){
@@ -58,11 +63,11 @@ void main (){
 
   group('initializeAlienPositions tests', (){
     test('initializeAlienPositions odd', () {
-      // Arrange
-      final mockConfig = MockConfigWrapper(33);
+      final mockConfig = MockConfigWrapper(21);
       final alien = Alien(config: mockConfig);
-
       final positions = alien.alienPositions;
+      print("69, configWrapper = ${alien.configWrapper.staticColumns}");
+      print('70, positions: $positions');
       // var positions = Alien().initializeAlienPositions();
       final initializedRows = [
         Point(0, 5),
