@@ -63,12 +63,9 @@ void main (){
 
   group('initializeAlienPositions tests', (){
     test('initializeAlienPositions odd', () {
-      final mockConfig = MockConfigWrapper(21);
+      final mockConfig = MockConfigWrapper(15);
       final alien = Alien(config: mockConfig);
       final positions = alien.alienPositions;
-      print("69, configWrapper = ${alien.configWrapper.staticColumns}");
-      print('70, positions: $positions');
-      // var positions = Alien().initializeAlienPositions();
       final initializedRows = [
         Point(0, 5),
         Point(0, 6),
@@ -83,6 +80,36 @@ void main (){
         ];
       expect(
           positions, initializedRows);
+    });
+    test('initializeAlienPositions even', () {
+      final mockConfig = MockConfigWrapper(20);
+      final alien = Alien(config: mockConfig);
+      final positions = alien.alienPositions;
+      final initializedRows = [
+        Point(0, 6),
+        Point(0, 7),
+        Point(0, 8),
+        Point(0, 9),
+        Point(0, 10),
+        Point(0, 11),
+        Point(1, 6),
+        Point(1, 7),
+        Point(1, 8),
+        Point(1, 9),
+        Point(1, 10),
+        Point(1, 11),
+      ];
+      expect(positions, initializedRows);
+    });
+    test('initializeAlienPositions, 3', () {
+      final mockConfig = MockConfigWrapper(3);
+      final alien = Alien(config: mockConfig);
+      final positions = alien.alienPositions;
+      final initializedRows = [
+        Point(0, 1),
+        Point(1, 1),
+      ];
+      expect(positions, initializedRows);
     });
   });
 }

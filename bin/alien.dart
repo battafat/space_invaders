@@ -19,7 +19,6 @@ class ConfigWrapper {
   }
 }
 
-
 class Alien {
   final ConfigWrapper configWrapper;
   final List<Point<int>> alienPositions;
@@ -27,24 +26,21 @@ class Alien {
   Alien({ConfigWrapper? config})
       : configWrapper = config ?? ConfigWrapper(),
         alienPositions = [] {
-          print('30, Alien constructor: configWrapper = $configWrapper');
-    print(
-        '32, Alien constructor: configWrapper.staticColumns = ${configWrapper.staticColumns}');
         alienPositions.addAll(_initializeAlienPositions());
   }
 // TODO: write tests for initializeAlienPositions
   List<Point<int>> _initializeAlienPositions(){
-    print(
-        "Using configWrapper with staticColumns: ${configWrapper.staticColumns}");
-        print('43, configWrapper $configWrapper');
     List<Point<int>> positions = [];
     for (var alienRow = 0; alienRow < 2; alienRow++) {
+      // TODO: write guard clause for cases where staticColumns < 6.
+      // if staticColumns = 5, 2 aliens each row
+      // if staticColumns = 4, 1 aliens each row
+      // if staticColumns = 3, 1 aliens each row
+      // if (configWrapper.staticColumns / 3)
       for (var alienColumn = (configWrapper.staticColumns ~/ 3); alienColumn < 2 * (configWrapper.staticColumns ~/ 3); alienColumn++) {
         positions.add(Point(alienRow, alienColumn));
       }
     }
-    print('positions: $positions');
-    
     return positions;
   }
 
