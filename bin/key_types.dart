@@ -1,11 +1,5 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:collection/collection.dart';
-
-import 'board.dart';
-import 'player.dart';
-import 'user_input.dart';
 enum KeyTypes {
   e([101]), // e
   d([100]), // d
@@ -13,10 +7,10 @@ enum KeyTypes {
   f([102]), // f
   backspace([32]),
   unknown([]),
-  right([67]),
-  left([68]),
-  up([65]),
-  down([66]),
+  right([67]), // right arrow key
+  left([68]), // left arrow key
+  up([65]), // up arrow key
+  down([66]), // down arrow key
   ;
 
   final List<int> codes;
