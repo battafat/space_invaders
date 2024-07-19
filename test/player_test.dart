@@ -73,8 +73,19 @@ void main () {
       //act
       player.handlePlayerMove(move);
       // assert
-      // if the move is right and the player is in the rightMost position,
-      // playerPosition should still equal rightmost after handlePlayerMove runs.
+      expect(player.playerPosition, matcher);
+    });
+    test('handlePlayerMove, move = left', () {
+      // arrange
+      final player = Player();
+      final move = KeyTypes.left;
+      // TODO: make a leftmost position in player?
+      final initialPlayerPosition = player.playerPosition;
+      final matcher =
+          Point(initialPlayerPosition.x, initialPlayerPosition.y - 1);
+      //act
+      player.handlePlayerMove(move);
+      // assert
       expect(player.playerPosition, matcher);
     });
   });
