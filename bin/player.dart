@@ -21,7 +21,10 @@ class Player {
     playerPosition = Point(playerPosition.x, playerPosition.y - 1);
   }
   void moveToLeftmost(){
-    playerPosition = Point(playerPosition.x, 0);
+    playerPosition = Point(playerPosition.x, leftmostPosition);
+  }
+  void moveToRightmost(){
+    playerPosition = Point(playerPosition.x, rightmostPosition);
   }
   
   void handlePlayerMove(KeyTypes move){
