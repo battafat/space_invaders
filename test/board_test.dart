@@ -43,4 +43,29 @@ void main() {
       expect(controlBoard.boardState, mockBoard);
     });
   });
+  group('reverseDirection tests', () {
+    test('reverseDirection if right, left', () {
+      // arrange
+      final controlBoard = Board();
+      controlBoard.setDirectionRight();
+      final matcher = Board.left;
+      // act
+      controlBoard.reverseDirection();
+      final actual = controlBoard.direction;
+      // Assert
+      expect(actual, matcher);
+    });
+    test('reverseDirection if left, right', () {
+      // arrange
+      final controlBoard = Board();
+      controlBoard.setDirectionLeft();
+      final matcher = Board.right;
+      // act
+      controlBoard.reverseDirection();
+      final actual = controlBoard.direction;
+      // Assert
+      expect(actual, matcher);
+    });
+  });
+
 }

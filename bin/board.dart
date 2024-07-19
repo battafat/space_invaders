@@ -16,7 +16,7 @@ class Board {
   void clearScreen() {
       print('\x1B[2J\x1B[H');
   }
-
+  
   void reverseDirection() {
     if (direction == right) {
       direction = left;
@@ -59,7 +59,16 @@ class Board {
       print(boardState[x].join());
     }
   }
+  // for testing
+  void setDirectionLeft() {
+    direction = left;
+  }
+
+  void setDirectionRight() {
+    direction = right;
+  }
 }
+
 
 
 

@@ -41,7 +41,6 @@ void main() async {
     // clear the screen after displaying the boardState
     // TODO: possibly write tests for clearScreen function?
     controlBoard.clearScreen();
-    // TODO: write tests for the updateboardState
     controlBoard.updateBoardState(alien.alienPositions, player.playerPosition);
     // display the boardState after each update
     // TODO: write a test for this function?
