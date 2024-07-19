@@ -44,7 +44,7 @@ void main() {
     });
   });
   group('reverseDirection tests', () {
-    test('reverseDirection if right, left', () {
+    test('reverseDirection if right', () {
       // arrange
       final controlBoard = Board();
       controlBoard.setDirectionRight();
@@ -55,7 +55,7 @@ void main() {
       // Assert
       expect(actual, matcher);
     });
-    test('reverseDirection if left, right', () {
+    test('reverseDirection if left', () {
       // arrange
       final controlBoard = Board();
       controlBoard.setDirectionLeft();
