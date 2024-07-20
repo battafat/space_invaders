@@ -1,6 +1,7 @@
 import 'key_types.dart';
 
 class UserInput {
+  // select the unique ASCII code from the list of codes
   List<int> processUserInput(List<int> event) {
     if (event[0] == 27) {
       if (event.length == 3 && event[1] == 91) {

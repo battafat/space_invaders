@@ -48,12 +48,10 @@ void main() async {
     // sleep keeps the boardState visible long enough to see between updates
     sleep(Duration(milliseconds: 500));
     if (controlBoard.changeDirection == true) {
-    // TODO: if refactored into function, write tests
       controlBoard.reverseDirection();
       //reset changeDirection
       controlBoard.changeDirection = false;
     }
-    // TODO: write tests for function
     alien.updateAlienPositions(alien.alienPositions, controlBoard.direction);
     
   });

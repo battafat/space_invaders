@@ -15,10 +15,10 @@ enum KeyTypes {
 
   final List<int> codes;
   const KeyTypes(this.codes);
-
+// fromValue matches the processed user input with a KeyType
   static dynamic fromValue(List<int> value) {
-  // TODO: refactor if necessary for readability
     final eq = ListEquality();
+    // values is automatically declared by Dart, which is a list of enums
     return values.firstWhere(
       (e) => eq.equals(e.codes, value),
       orElse: () => unknown,
