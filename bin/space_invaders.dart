@@ -8,7 +8,6 @@ import 'user_input.dart';
 
 late final StreamSubscription<List<int>> stdinStreamSubscription;
 
-
 void main() async {
   // TODO: add reset command at beginning to make sure terminal is clear
   final player = Player();
@@ -18,18 +17,8 @@ void main() async {
 
   stdout.flush();
   // TODO: write startUserInput()
-  stdin.lineMode = false;
-  stdin.echoMode = false;
-  //TODO: check whether streamController is even necessary now that I don't have multiple listeners
-  StreamController<List<int>> streamController = StreamController<List<int>>.broadcast();
+  userInput.startUserInput(player);
   
-  stdinStreamSubscription = stdin.listen((keyPress) {
-    // TODO: write tests for processUserInput
-    final event = userInput.processUserInput(keyPress);
-    final KeyTypes key = KeyTypes.fromValue(event);
-    player.handlePlayerMove(key);
-    streamController.add(event);
-  });
   
   // TODO: Make this it's own gameLoop() ?
   Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {

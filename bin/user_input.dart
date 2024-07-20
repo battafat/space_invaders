@@ -1,3 +1,10 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'key_types.dart';
+import 'player.dart';
+import 'space_invaders.dart';
+
 class UserInput {
   // select the unique ASCII code from the list of codes
   List<int> processUserInput(List<int> event) {
@@ -26,6 +33,22 @@ class UserInput {
       }
     }
     return event;
+  }
+
+  void startUserInput(Player player){
+    stdin.lineMode = false;
+    stdin.echoMode = false;
+    //TODO: check whether streamController is even necessary now that I don't have multiple listeners
+    StreamController<List<int>> streamController =
+        StreamController<List<int>>.broadcast();
+
+    stdinStreamSubscription = stdin.listen((keyPress) {
+      // TODO: write tests for processUserInput
+      final event = processUserInput(keyPress);
+      final KeyTypes key = KeyTypes.fromValue(event);
+      player.handlePlayerMove(key);
+      streamController.add(event);
+    });
   }
 }
 
