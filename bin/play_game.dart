@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:dart_console/dart_console.dart';
-
 import 'board.dart';
 
 void playInvaders(board) {

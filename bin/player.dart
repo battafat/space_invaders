@@ -1,10 +1,6 @@
-
-import 'dart:async';
-import 'dart:io';
 import 'dart:math';
 import 'board.dart';
 import 'key_types.dart';
-import 'space_invaders.dart';
 
 class Player {
   KeyTypes left = KeyTypes.left;

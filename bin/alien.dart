@@ -1,14 +1,6 @@
-import "dart:async";
 import "dart:core";
-
 import "dart:math";
-import "player.dart";
-import "space_invaders.dart";
-import "package:dart_console/dart_console.dart";
-import 'dart:io';
 import "board.dart";
-import "key_types.dart";
-import "user_input.dart";
 
 class ConfigWrapper {
   int get staticColumns => Board.columns;

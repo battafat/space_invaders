@@ -1,9 +1,5 @@
 import 'dart:async';
-import 'dart:collection';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
-import 'package:dart_console/dart_console.dart';
 import 'alien.dart';
 import 'board.dart';
 import 'key_types.dart';

@@ -1,5 +1,3 @@
-import 'key_types.dart';
-
 class UserInput {
   // select the unique ASCII code from the list of codes
   List<int> processUserInput(List<int> event) {
