@@ -16,9 +16,7 @@ void main() async {
   final alien = Alien();
   final userInput = UserInput();
 
-  stdout.flush();
   userInput.startUserInput(player);
   gameLoop.runGameLoop(controlBoard, alien, player);
   //TODO: add some kind of reset? that or endGame function
-  
 }
