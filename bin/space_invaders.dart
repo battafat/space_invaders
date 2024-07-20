@@ -19,8 +19,6 @@ void main() async {
   stdout.flush();
   userInput.startUserInput(player);
   gameLoop.runGameLoop(controlBoard, alien, player);
-  // makes sure the buffer is flushed so that terminal
-  // doesn't print previous game's output
   //TODO: add some kind of reset? that or endGame function
-  stdout.flush();
+  
 }
