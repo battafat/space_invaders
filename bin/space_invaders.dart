@@ -3,7 +3,6 @@ import 'dart:io';
 import 'alien.dart';
 import 'board.dart';
 import 'game_loop.dart';
-import 'key_types.dart';
 import 'player.dart';
 import 'user_input.dart';
 
@@ -19,7 +18,6 @@ void main() async {
 
   stdout.flush();
   userInput.startUserInput(player);
-  // TODO: Make this it's own gameLoop() ?
   gameLoop.runGameLoop(controlBoard, alien, player);
   // makes sure the buffer is flushed so that terminal
   // doesn't print previous game's output
