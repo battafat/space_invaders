@@ -1,9 +1,5 @@
 import 'package:collection/collection.dart';
 enum KeyTypes {
-  e([101]), // e
-  d([100]), // d
-  s([115]), // s
-  f([102]), // f
   backspace([32]),
   unknown([]),
   right([67]), // right arrow key
