@@ -1,9 +1,9 @@
 import 'dart:math';
+import 'game_loop.dart';
 
 class Board {
   static const space = ' ';
   static const alien = '@';
-  static const border = '|';
   static const player = '^';
   static const rows = 10;
   static const columns = 15;
@@ -32,7 +32,6 @@ class Board {
         if (alienPositions.contains(Point(row, column))) {
           boardState[row][column] = Board.alien;
           // check if aliens reached either the rightmost or leftmost index.
-          // TODO: write test for isChangeDirection
           changeDirection = isChangeDirection(column);
         } else if (playerPosition == Point(row, column)) {
           boardState[row][column] = Board.player;
@@ -49,6 +48,8 @@ class Board {
     }
     // check if aliens reached the leftmost index.
     if (column == 0) {
+      // temporary method for keeping track of side-to-side alien iterations
+      GameLoop.count += 1;
       return changeDirection = true;
     }
     return changeDirection;

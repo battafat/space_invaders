@@ -5,8 +5,14 @@ import 'board.dart';
 import 'player.dart';
 
 class GameLoop {
+  // temporary method to track side-to-side alien iterations.
+  static var count = 0;
   void runGameLoop(Board controlBoard, Alien alien, Player player){
+    
     Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
+      if (count >= 2) {
+        endGame();
+      }
       await Future.delayed(Duration(milliseconds: 100));
       // clear the screen after displaying the boardState
       controlBoard.clearScreen();
@@ -23,5 +29,8 @@ class GameLoop {
       }
       alien.updateAlienPositions(alien.alienPositions, controlBoard.direction);
     });
+  }
+  void endGame(){
+    exit(0);
   }
 }

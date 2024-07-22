@@ -23,11 +23,6 @@ class Alien {
   List<Point<int>> _initializeAlienPositions(){
     List<Point<int>> positions = [];
     for (var alienRow = 0; alienRow < 2; alienRow++) {
-      // TODO: write guard clause for cases where staticColumns < 6.
-      // if staticColumns = 5, 2 aliens each row
-      // if staticColumns = 4, 1 aliens each row
-      // if staticColumns = 3, 1 aliens each row
-      // if (configWrapper.staticColumns / 3)
       for (var alienColumn = (configWrapper.staticColumns ~/ 3); alienColumn < 2 * (configWrapper.staticColumns ~/ 3); alienColumn++) {
         positions.add(Point(alienRow, alienColumn));
       }

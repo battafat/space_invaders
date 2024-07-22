@@ -16,9 +16,11 @@ class Player {
   void moveLeft(){
     playerPosition = Point(playerPosition.x, playerPosition.y - 1);
   }
+  //used for testing
   void moveToLeftmost(){
     playerPosition = Point(playerPosition.x, leftmostPosition);
   }
+ // used for testing
   void moveToRightmost(){
     playerPosition = Point(playerPosition.x, rightmostPosition);
   }
