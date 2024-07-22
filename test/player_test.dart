@@ -1,9 +1,6 @@
 import 'dart:math';
-
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-
-import '../bin/board.dart';
 import '../bin/key_types.dart';
 import '../bin/player.dart';
 
