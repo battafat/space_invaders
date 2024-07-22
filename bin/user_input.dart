@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'key_types.dart';
 import 'player.dart';
-import 'space_invaders.dart';
+import 'main.dart';
 
 class UserInput {
   // select the unique ASCII code from the list of codes

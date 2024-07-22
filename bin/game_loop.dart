@@ -5,11 +5,10 @@ import 'board.dart';
 import 'player.dart';
 
 class GameLoop {
-  // temporary method to track side-to-side alien iterations.
   static var count = 0;
   void runGameLoop(Board controlBoard, Alien alien, Player player){
-    
     Timer.periodic(Duration(milliseconds: 700), (Timer timer) async {
+  // temporary way to track side-to-side alien iterations.
       if (count >= 2) {
         endGame();
       }
